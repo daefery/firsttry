@@ -1,0 +1,9 @@
+#home_banner{
+	background: rgba(0, 0, 0, 0.3);
+	width: 100%
+}
+#home_banner div{
+    color: white;
+    padding: 15px;
+    margin: 5%;
+}
