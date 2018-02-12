@@ -22,7 +22,6 @@
   </ul>
 </div>
 </div>
-
 <!-- <li><a href="#"><i class="material-icons">power_settings_new</i>logout</a></li> -->
 </nav>
 </div>
@@ -45,22 +44,14 @@
   </div>
   </li>
   <li><div class="divider"></div></li>
-  <li><a class="dropdown-button" href="#" data-activates="drop-mobile">Solutions<i class="material-icons right">arrow_drop_down</i></a></li>
   <li *ngFor="let joke of parent">
       <div *ngIf="joke.child != null; then dropmenu else singlemenu"></div>
       <ng-template #singlemenu><a routerLink="{{joke.url}}">{{joke.text_menu}}</a></ng-template>
       <ng-template #dropmenu>
-      <!-- <div id="dropdown-mobile-{{joke.menu_id}}"></div> -->
-      <a class="dropdown-button" href="#" data-activates="test">Solutions<i class="material-icons right">arrow_drop_down</i></a>
-       <!--  <ul id="{{joke.menu_id}}" class="dropdown-content">
+      <a class="dropdown-button" href="#" id="item_{{joke.menu_id}}"></a>
+        <ul id="data_{{joke.menu_id}}" class="dropdown-content">
           <li *ngFor="let child of joke.child"><a routerLink="child.url">{{child.text_menu}}</a></li>
-        </ul> -->
+        </ul>
       </ng-template>
     </li>
-  <!-- <li><a class="dropdown-button" href="#" data-activates="drop-mobile">Solutions<i class="material-icons right">arrow_drop_down</i></a></li>
-  <li><a routerLink="/profile">Science</a></li>
-  <li><a routerLink="/profile">Assessments</a></li>
-  <li><a routerLink="/profile">Customers</a></li>
-  <li><a routerLink="/profile">Blog</a></li> -->
-  
 </ul>
