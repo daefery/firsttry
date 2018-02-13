@@ -2,3 +2,6 @@ span.badge.new{
 	float: left;
 	margin-right: 5%;
 }
+.progress{
+	height: 50px;
+}
