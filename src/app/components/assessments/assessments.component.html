@@ -1,0 +1,84 @@
+<div class="row container">
+
+	<!-- <ul class="collection with-header"> -->
+        
+        <!-- <li *ngFor="let qs of questions">
+        	<div>{Alvin}<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div>
+        </li> -->
+      <!-- </ul> -->
+
+      <div *ngFor="let qs of questions; let i = index">
+      	<div id="qs_{{i}}" style="display: none;">
+      	<div class="col s12 m12">
+	      	<p class="flow-text"><i class="tiny material-icons" style="color: #26a69a">arrow_forward</i> {{qs.question}}</p>
+      	</div>
+      
+	      <div class="col s12 m4">
+	      	<div class="collection">
+		        <a *ngFor="let qs_child of qs.options; let j = index" href="javascript:void(0)" (click)="myEvent('qs_'+(i+1), 'qs_'+i)" class="collection-item">
+		        <span class="new badge red darken-2" data-badge-caption="">{{j+1}}</span> <span>{{qs_child}}</span>
+		        </a>
+		        
+
+		        <!-- <a href="javascript:void(0)" (click)="myEvent('tab2', 'tab1')" class="collection-item"><span class="new badge orange darken-2" data-badge-caption="2"></span> Tidak Sesuai</a>
+		        <a href="javascript:void(0)" (click)="myEvent('tab2','tab1')" class="collection-item"><span class="new badge lime darken-2" data-badge-caption="3"></span> Sesuai</a>
+		        <a href="javascript:void(0)" (click)="myEvent('tab2', 'tab1')" class="collection-item"><span class="new badge green darken-2" data-badge-caption="4"></span> Sangat Sesuai</a> -->
+	      	</div>
+	      </div>
+
+	      
+      </div>
+      <div id="qs_{{i+1}}" style="display:none;" *ngIf="i+1 == questions.length">
+	      	<h1>THANK YOU</h1>
+	      </div>
+      </div>
+      
+      <!-- <div id="tab1">
+      	<div class="col s12 m12">
+	      	<p class="flow-text"><i class="tiny material-icons" style="color: #26a69a">arrow_forward</i> Saya menyukai pekerjaan yang memiliki banyak aktivitas di lapangan atau luar ruangan.</p>
+      	</div>
+      
+	      <div class="col s12 m4">
+	      	<div class="collection">
+		        <a href="javascript:void(0)" (click)="myEvent('tab2', 'tab1')" class="collection-item"><span class="new badge red darken-2" data-badge-caption="1"></span> Sangat Tidak Sesuai</a>
+		        <a href="javascript:void(0)" (click)="myEvent('tab2', 'tab1')" class="collection-item"><span class="new badge orange darken-2" data-badge-caption="2"></span> Tidak Sesuai</a>
+		        <a href="javascript:void(0)" (click)="myEvent('tab2','tab1')" class="collection-item"><span class="new badge lime darken-2" data-badge-caption="3"></span> Sesuai</a>
+		        <a href="javascript:void(0)" (click)="myEvent('tab2', 'tab1')" class="collection-item"><span class="new badge green darken-2" data-badge-caption="4"></span> Sangat Sesuai</a>
+	      	</div>
+	      </div>
+      </div>
+
+      <div id="tab2" style="display: none;">
+      	<div class="col s12 m12">
+	      	<p class="flow-text"><i class="tiny material-icons" style="color: #26a69a">arrow_forward</i> Saya menyukai pekerjaan yang memiliki banyak aktivitas di lapangan atau luar ruangan.</p>
+      	</div>
+      
+	      <div class="col s12 m4">
+	      	<div class="collection">
+		        <a href="#!" (click)="myEvent('tab2', 'tab1')" class="collection-item"><span class="new badge red darken-2" data-badge-caption="1"></span> Sangat Tidak Sesuai</a>
+		        <a href="#!" (click)="myEvent('tab2', 'tab1')" class="collection-item"><span class="new badge orange darken-2" data-badge-caption="2"></span> Tidak Sesuai</a>
+		        <a href="#!" (click)="myEvent('tab2','tab1')" class="collection-item"><span class="new badge lime darken-2" data-badge-caption="3"></span> Sesuai</a>
+		        <a href="#!" (click)="myEvent('tab2', 'tab1')" class="collection-item"><span class="new badge green darken-2" data-badge-caption="4"></span> Sangat Sesuai</a>
+	      	</div>
+	      </div>
+      </div> -->
+
+      <!-- <div class="col s12 m12">
+      	<ul class="collapsible popout" data-collapsible="accordion">
+		    <li>
+		      <div class="collapsible-header"><p class="flow-text">Saya menyukai pekerjaan yang memiliki banyak aktivitas di lapangan atau luar ruangan.</p></div>
+		      <div class="collapsible-body row">
+		      <div class="collection col s12 m4">
+		        <a href="#!" class="collection-item"><span class="new badge red darken-2" data-badge-caption="1"></span> Sangat Tidak Sesuai</a>
+		        <a href="#!" class="collection-item"><span class="new badge orange darken-2" data-badge-caption="2"></span> Tidak Sesuai</a>
+		        <a href="#!" class="collection-item"><span class="new badge lime darken-2" data-badge-caption="3"></span> Sesuai</a>
+		        <a href="#!" class="collection-item"><span class="new badge green darken-2" data-badge-caption="4"></span> Sangat Sesuai</a>
+  			</div>
+      		</div>
+		    </li>
+		  </ul>
+		        
+      </div> -->
+
+
+</div>
