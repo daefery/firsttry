@@ -1,39 +1,100 @@
 <div class="row container">
-	<h1 class="countdown col s12 m4"></h1>
-	<h1 class="red-text text-darken-2 col s12 m8" id="timeout_message" style="display: none">TIME OUT</h1>
-	<div class="col s12 m12" id="progress">
+	<div *ngIf="id == undefined">
+		 <div class="row">
+		 	<h2 class="header">Parallax</h2>
+		      <p class="flow-text">Parallax is an effect where the background content or image in this case, is moved at a different speed than the foreground content while scrolling.</p>
+		    <div class="col s12 m6">
+		      <div class="card hoverable small">
+		          <div class="card-image">
+		            <img src="https://dad0jvgioe6jb.cloudfront.net/assets/images/interest_test/img-header-landing_page.png">
+		            <span class="card-title">Card Title Version 1</span>
+		          </div>
+		          <div class="card-content">
+		            <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+		          </div>
+		          <div class="card-action">
+		            <a routerLink="v1">Version 1</a>
+		          </div>
+		        </div>
+		    </div>
+		    <div class="col s12 m6">
+		      <div class="card hoverable small">
+		          <div class="card-image">
+		            <img src="https://cdn.traitify.com/slides/faac75d0-a64c-4df7-877c-0cbc43e1c927_desktop">
+		            <span class="card-title">Card Title Version 2</span>
+		          </div>
+		          <div class="card-content">
+		            <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+		          </div>
+		          <div class="card-action">
+		            <a routerLink="v2">Version 2</a>
+		          </div>
+		        </div>
+		    </div>
+		  </div>
+	</div>
+	<div *ngIf="id == 'v1'">
+		<div class="row">
+		<h1 class="countdown col s12 m4"></h1>
+		<h1 class="red-text text-darken-2 col s12 m8" id="timeout_message" style="display: none">TIME OUT</h1>
+		<h1 id="thanks_message" style="display: none">THANK YOU</h1>
+	</div>
+	<div class="card-panel" id="pembungkus">
+		<div id="progress">
 		<!-- <div class="card-panel">
 			
 		</div> -->
 		<div class="progress">
-		      <div class="determinate" style="width: 0%">
+		      <div class="determinate" id="determinate" style="width: 0%">
 		      </div>
 		  		<div class="col s12 m4"></div>
 		      	<div class="col s12 m4">
-		      		<h5 class="center-align" id="progress_count" style="position: relative;">{{current_qs}}/{{total_qs}}</h5>
+		      		<h5 class="center-align" id="progress_count" style="position: relative;">0/{{total_qs}}</h5>
 		      	</div>
 		      	<div class="col s12 m4"></div>
 		  	</div>
-	</div>
-	<div *ngFor="let qs of questions; let i = index" style="">
-		<div id="qs_{{i}}" style="display: none;">
-		  	<div class="col s12 m12">
-		      	<p class="flow-text"><i class="tiny material-icons blue-text text-darken-2">arrow_forward</i> {{qs.question}}</p>
-		  	</div>
-
-		  	<div class="col s12 m4">
-			  	<div class="collection">
-			        <!-- <a *ngFor="let qs_child of qs.options; let j = index" href="javascript:void(0)" (click)="progressEvent('qs_'+(i+1), 'qs_'+i, i+1, questions.length)" class="collection-item">
-			        	<span class="new badge red darken-2" data-badge-caption="">{{j+1}}</span> <span>{{qs_child}}</span>
-			        </a> -->
-			        <a *ngFor="let qs_child of customOption; let j = index" href="javascript:void(0)" (click)="progressEvent('qs_'+(i+1), 'qs_'+i, i+1, questions.length)" class="collection-item">
-			        	<span class="new badge {{qs_child.class}}" data-badge-caption="">{{j+1}}</span> <span>{{qs_child.text}}</span>
-			        </a>
+		</div>
+		<div *ngFor="let qs of questions; let i = index" style="">
+			<div id="qs_{{i}}" style="display: none;">
+			  	<div class="col s12 m12">
+			      	<p class="flow-text">{{qs.question}}</p>
 			  	</div>
+
+			  	<div class="col s12 m4">
+				  	<div class="collection">
+				        <!-- <a *ngFor="let qs_child of qs.options; let j = index" href="javascript:void(0)" (click)="progressEvent('qs_'+(i+1), 'qs_'+i, i+1, questions.length)" class="collection-item">
+				        	<span class="new badge red darken-2" data-badge-caption="">{{j+1}}</span> <span>{{qs_child}}</span>
+				        </a> -->
+				        <a *ngFor="let qs_child of customOption; let j = index" href="javascript:void(0)" (click)="progressEvent('qs_'+(i+1), 'qs_'+i, i+1, questions.length)" class="collection-item">
+				        	<span class="new badge {{qs_child.class}}" data-badge-caption="">{{j+1}}</span> <span>{{qs_child.text}}</span>
+				        </a>
+				  	</div>
+				</div>
 			</div>
-		</div>
-		<div class="thankyou" id="qs_{{i+1}}" style="display:none;" *ngIf="i+1 == questions.length">
-	  	<h1>THANK YOU</h1>
+			
 		</div>
 	</div>
+	</div>
+
+	 <div class="row" *ngIf="id == 'v2'">
+      <div class="col s12 m12">
+        <div class="card-panel" style="background-image: url(https://cdn.traitify.com/slides/caa21772-aa58-4c8e-b3af-01eea3312969_desktop);">
+			<div class="progress">
+		      <div class="determinate" style="width: 0%"></div>
+		  		<div class="col s12 m4"></div>
+		      	<div class="col s12 m4">
+		      		<h5 class="center-align" id="progress_count" style="position: relative;">Snakes</h5>
+		      	</div>
+		      	<div class="col s12 m4"></div>
+		  	</div>
+		  	<div class="col s12 m4"></div>
+			<div class="ass_button center-align col s12 m4">
+				<a class="waves-effect waves-light btn-large blue darken-2">Me</a>
+				<a class="waves-effect waves-light btn-large red darken-2">Not Me</a>
+			</div>
+			<div class="col s12 m4"></div>	
+			
+        </div>
+      </div>
+    </div>
 </div>

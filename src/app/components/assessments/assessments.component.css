@@ -4,4 +4,27 @@ span.badge.new{
 }
 .progress{
 	height: 50px;
+	background-color: rgba(0,0,0,.5);
+    color: #fff;
+}
+.progress .determinate{
+	background-color: rgba(65,182,85,.8);
+}
+.card-panel{
+	/*background-image: url(https://cdn.traitify.com/slides/caa21772-aa58-4c8e-b3af-01eea3312969_desktop);*/
+    width: 100%;
+    height: 400px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    padding: 0px;
+}
+.card-panel > #ass {
+	
+}
+.ass_button{
+	margin-top: 250px;
+}
+.card .card-image .card-title{
+	background-color: rgba(0,0,0,.5);
 }

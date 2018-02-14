@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Assessments } from '../../models/assessments/assessments';
-declare var $, Materialize:any;
+import { ActivatedRoute } from '@angular/router';
+
+declare var $, Materialize, moment:any;
 @Component({
   selector: 'app-assessments',
   templateUrl: './assessments.component.html',
@@ -8,10 +10,10 @@ declare var $, Materialize:any;
 })
 export class AssessmentsComponent implements OnInit {
   questions: Assessments[];
-  customOption:[];
-  current_qs:int;
-  total_qs:int;
-  constructor() { 
+  customOption:any[];
+  total_qs:number;
+  id:string;
+  constructor(private router: ActivatedRoute) { 
     this.customOption = [
       {text:'Sangat Tidak Sesuai', class:'red darken-2'},
       {text:'Tidak Sesuai', class:'orange darken-2'},
@@ -38,34 +40,34 @@ export class AssessmentsComponent implements OnInit {
       new Assessments('Q9', 'Saya suka melihat bagaimana cara suatu mesin bekerja.', option),
   		new Assessments('Q10', 'Saya senang pekerjaan yang jelas dan bersifat teknis.', option),
   	];
-    this.current_qs = 1;
     this.total_qs = this.questions.length;
   }
 
   ngOnInit() {
+  	this.id = this.router.snapshot.params.id;
+  	console.log('id:'+this.id);
   	$(document).ready(function(){
       $('.carousel.carousel-slider').carousel({fullWidth: true});
+  	  $('#qs_0').fadeIn('slow');
       var functionInterval = null;
-  		$('#qs_0').fadeIn('slow');
-      var duration = moment.duration((6*60)*1000, 'milliseconds');
-      var interval = 100;
-      functionInterval = setInterval(processTimer,100);
+      var duration = moment.duration((5*60)*1000, 'milliseconds');
+      var interval = 10;
+      functionInterval = setInterval(processTimer,10);
 
       function processTimer(){
         duration = moment.duration(duration - interval, 'milliseconds');
         var second = duration.seconds();
         var hours = duration.hours();
         var minutes = duration.minutes();
-        $('.countdown').text(duration.hours() + ":" + duration.minutes() + ":" + duration.seconds())
+        $('.countdown').text(duration.hours() + ":" + duration.minutes() + ":" + duration.seconds());
         if(second == 0 && hours == 0 && minutes == 0){
-          var kl = $( "div[id*='qs_']");
-          kl.remove();
-          $('#progress').remove();
-          $('#timeout_message').fadeIn('slow');
-          clearInterval(functionInterval);
+			$('#pembungkus').remove();
+			$('#progress').remove();
+			$('#timeout_message').fadeIn('slow');
+			clearInterval(functionInterval);
         }else{
-          var ckl = $('.thankyou').attr('style');
-          if(ckl != 'display:none;'){
+          var ckl = $('#thanks_message').attr('style');
+          if(ckl == undefined){
             clearInterval(functionInterval);
           }
         }
@@ -75,15 +77,17 @@ export class AssessmentsComponent implements OnInit {
 
   public progressEvent(event, root, lengthRoot, totalRoot) {
     var tot = 100/totalRoot;
-    this.current_qs = this.current_qs + 1;
   	$('#'+root).fadeOut( "slow", function() {
-      $('.determinate').attr('style', 'width:'+lengthRoot*tot+'%');
+      $('#determinate').attr('style', 'width:'+lengthRoot*tot+'%');
+      $('#progress_count').text(lengthRoot+'/'+totalRoot);
+
       if(lengthRoot == totalRoot){
         $('.countdown').remove();
         $('#progress_count').text('Completed.');
         setTimeout(function(){
-          $('#progress').hide();
-          $('#'+event).removeAttr('style');
+  			$('#pembungkus').remove();
+          	$('#progress').hide();
+          	$('#thanks_message').removeAttr('style');
         }, 2000);
       }else{
         $('#'+event).removeAttr('style');

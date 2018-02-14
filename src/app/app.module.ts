@@ -10,6 +10,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { routing } from './routes/app.routes';
 import { LoginComponent } from './components/login/login.component';
 import { AssessmentsComponent } from './components/assessments/assessments.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AssessmentsComponent } from './components/assessments/assessments.compo
     HomeComponent,
     ProfileComponent,
     LoginComponent,
-    AssessmentsComponent
+    AssessmentsComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
