@@ -10,7 +10,6 @@ export class LoginComponent implements OnInit {
   apiValues: string;
   ngOnInit() {
   let id = this.route.snapshot.url[0].path;
-  console.log(id);
   this.apiValues = id;
   }
 

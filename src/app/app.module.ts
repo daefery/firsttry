@@ -3,14 +3,24 @@ import { BrowserModule }  from '@angular/platform-browser';
 import { HttpModule, JsonpModule } from '@angular/http';
 
 import { AppComponent }         from './app.component';
-import { NavigationComponent } from './components/navigation/navigation.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { HomeComponent } from './components/home/home.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { routing } from './routes/app.routes';
-import { LoginComponent } from './components/login/login.component';
-import { AssessmentsComponent } from './components/assessments/assessments.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+
+//custom component
+import { NavigationComponent } from '@comp/navigation/navigation.component';
+import { FooterComponent } from '@comp/footer/footer.component';
+import { HomeComponent } from '@comp/home/home.component';
+import { ProfileComponent } from '@comp/profile/profile.component';
+import { LoginComponent } from '@comp/login/login.component';
+import { AssessmentsComponent } from '@comp/assessments/assessments.component';
+import { PageNotFoundComponent } from '@comp/page-not-found/page-not-found.component';
+
+//custom service
+import { AssessmentsService } from '@serv/assessments/assessments.service';
+
+//custom route
+import { routing } from '@route/app.routes';
+
+//custom directive
+import { AssessmentDirective } from '@dirv/assessments/assessment.directive';
 
 @NgModule({
   declarations: [
@@ -21,13 +31,14 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     ProfileComponent,
     LoginComponent,
     AssessmentsComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AssessmentDirective
   ],
   imports: [
     BrowserModule,
     routing
   ],
-  providers: [],
+  providers: [AssessmentsService],
   bootstrap: [AppComponent, NavigationComponent, FooterComponent]
 })
 export class AppModule { }

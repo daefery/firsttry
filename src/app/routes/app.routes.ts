@@ -1,12 +1,11 @@
 import { ModuleWithProviders }  from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-//import { catRoutes }    from './cats/cat.routes';
-import { HomeComponent } from '../components/home/home.component';
-import { ProfileComponent } from '../components/profile/profile.component';
-import { LoginComponent } from '../components/login/login.component';
-import { PageNotFoundComponent } from '../components/page-not-found/page-not-found.component';
-import { AssessmentsComponent } from '../components/assessments/assessments.component';
+import { HomeComponent } from '@comp/home/home.component';
+import { ProfileComponent } from '@comp/profile/profile.component';
+import { LoginComponent } from '@comp/login/login.component';
+import { PageNotFoundComponent } from '@comp/page-not-found/page-not-found.component';
+import { AssessmentsComponent } from '@comp/assessments/assessments.component';
 
 const appRoutes : Routes =
   [

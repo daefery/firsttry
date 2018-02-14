@@ -28,3 +28,7 @@ span.badge.new{
 .card .card-image .card-title{
 	background-color: rgba(0,0,0,.5);
 }
+.ass_result{
+	background-color: rgba(0, 105, 255, 0.4);
+    color: white;
+}
