@@ -6,7 +6,7 @@
 		    <div class="col s12 m6">
 		      <div class="card hoverable small">
 		          <div class="card-image">
-		            <img src="https://dad0jvgioe6jb.cloudfront.net/assets/images/interest_test/img-header-landing_page.png">
+		            <img src="assets/images/assessments/img-header-landing_page.png">
 		            <span class="card-title">Card Title Version 1</span>
 		          </div>
 		          <div class="card-content">
@@ -20,7 +20,7 @@
 		    <div class="col s12 m6">
 		      <div class="card hoverable small">
 		          <div class="card-image">
-		            <img src="https://cdn.traitify.com/slides/faac75d0-a64c-4df7-877c-0cbc43e1c927_desktop">
+		            <img src="assets/images/assessments/global.jpg">
 		            <span class="card-title">Card Title Version 2</span>
 		          </div>
 		          <div class="card-content">
@@ -116,8 +116,8 @@
 				  	<div *ngFor="let qs2 of questionsv2;let i = index" id="qs2_{{i}}" style="display: none">
 				  		<div class="col s12 m4"></div>
 						<div class="ass_button center-align col s12 m4">
-							<a class="waves-effect waves-light btn-large blue darken-2" (click)="progressEventV2('qs2_'+(i+1), 'qs2_'+i, i+1, questionsv2.length)">Me</a>
-							<a class="waves-effect waves-light btn-large red darken-2" (click)="progressEventV2('qs2_'+(i+1), 'qs2_'+i, i+1, questionsv2.length)">Not Me</a>
+							<a style="width: 50%; float: left;" class="waves-effect waves-light btn-large blue darken-2" (click)="progressEventV2('qs2_'+(i+1), 'qs2_'+i, i+1, questionsv2.length)">&nbsp;&nbsp;Me&nbsp;&nbsp;</a>
+							<a style="width: 50%; float: right;" class="waves-effect waves-light btn-large red darken-2" (click)="progressEventV2('qs2_'+(i+1), 'qs2_'+i, i+1, questionsv2.length)">Not Me</a>
 						</div>
 						<div class="col s12 m4"></div>	
 				  	</div>
