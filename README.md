@@ -2,6 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.8.
 
+## Setup
+
+after clone run in cmd : `npm install`. `ng build`, see if it got some errors like `moment js` or `materialize ui`. moment : `npm install moment`. materialize:`npm install materialize-css`
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
