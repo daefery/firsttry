@@ -5,7 +5,7 @@
         <div class="card-panel">
           <div class="row">
           	<h4>This is Admin Form</h4>
-		    <form class="col s12">
+		    <form class="col s12" novalidate>
 		      <div class="row">
 		        <div class="input-field col s12">
 		          <input id="section_name" type="text" class="validate">
@@ -45,7 +45,7 @@
 		      </div>
 		      <div class="row">
 		      	<div class="input-field col 12 right">
-		      		<a class="waves-effect waves-light btn">Add</a>
+		      		<a class="waves-effect waves-light btn" (click)="addSection()">Add</a>
 		      	</div>
 		      </div>
 		    </form>
