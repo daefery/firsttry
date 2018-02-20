@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Assessments } from '@model/assessments/assessments';
+import { Assessments } from './assessments.model';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { AssessmentsService } from '@serv/assessments/assessments.service';
+import { AssessmentsService } from './assessments.service';
 
 declare var $, Materialize, moment:any;
 @Component({

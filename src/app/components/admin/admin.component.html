@@ -1,0 +1,79 @@
+
+
+  <div class="row container">
+      <div class="col s12 m12">
+        <div class="card-panel">
+          <div class="row">
+          	<h4>This is Admin Form</h4>
+		    <form class="col s12">
+		      <div class="row">
+		        <div class="input-field col s12">
+		          <input id="section_name" type="text" class="validate">
+		          <label for="section_name">Section Name</label>
+		        </div>
+		      </div>
+		      <div class="row">
+		        <div class="input-field col s12">
+		          <textarea id="description" class="materialize-textarea"></textarea>
+		          <label for="description">Description</label>
+		        </div>
+		      </div>
+		      <div class="row">
+		      	<div class="input-field col s12">
+		          <label for="hgaLabel">Has Generic Answer?</label>
+		        </div>
+		      </div>
+		      <div class="row">
+		        <div class="col s6">
+		        	<p>
+				      <input name="hga1" type="radio" id="hga1" checked />
+				      <label for="hga1">Yes</label>
+				    </p>
+		        </div>
+		        <div class="col s6">
+				    <p>
+				      <input name="hga1" type="radio" id="hga2" />
+				      <label for="hga2">No</label>
+				    </p>
+		        </div>
+		      </div>
+		      <div class="row">
+		        <div class="input-field col s12">
+		          <input id="time_duration" type="number" class="validate">
+		          <label for="time_duration">Time Duration(in minutes)</label>
+		        </div>
+		      </div>
+		      <div class="row">
+		      	<div class="input-field col 12 right">
+		      		<a class="waves-effect waves-light btn">Add</a>
+		      	</div>
+		      </div>
+		    </form>
+		  </div>
+        </div>
+      </div>
+
+      <div class="row">
+      	<table class="highlight">
+        <thead>
+          <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Has Generic Answer</th>
+              <th>Time Duration</th>
+              <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let sec of section_data; let i = index" style="">
+            <td>{{sec.name}}</td>
+            <td>{{sec.description}}</td>
+            <td>{{sec.has_generic_answer}}</td>
+            <td>{{sec.time_duration}}</td>
+            <td><a class="waves-effect waves-light"><i class="material-icons left">announcement</i></a></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>

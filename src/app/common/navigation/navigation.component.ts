@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Navigation } from '@model/navigation/navigation';
+import { Navigation } from './navigation.model';
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -23,7 +23,7 @@ constructor() {
       new Navigation("h01", "Solutions", "profile", this.childSolution),
       new Navigation("h02", "Science", "profile", null),
       new Navigation("h03", "Assessments", "profile", null),
-      new Navigation("h03", "Customers", "profile", null),
+      new Navigation("h03", "Admin", "admin", null),
     ];
     localStorage.setItem("menus", JSON.stringify(this.parent));
   }

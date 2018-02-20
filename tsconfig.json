@@ -10,12 +10,7 @@
     "target": "es5",
     "paths": {
       "@comp/*": ["app/components/*"],
-      "@dirv/*": ["app/directives/*"],
-      "@serv/*": ["app/services/*"],
-      "@model/*": ["app/models/*"],
-      "@route/*": ["app/routes/*"],
-      "@enum/*": ["app/enums/*"],
-      "@mod/*": ["app/modules/*"]
+      "@com/*": ["app/common/*"]
     },
     "typeRoots": [
       "node_modules/@types"

@@ -1,0 +1,39 @@
+{
+  "data": [
+    {
+      "id": "123",
+      "name": "Test Section 1",
+      "description": "Test Section 1",
+      "has_generic_answer": false,
+      "time_duration": 12
+    },
+    {
+      "id": "123",
+      "name": "Test Section 2",
+      "description": "Test Section 1",
+      "has_generic_answer": false,
+      "time_duration": 12
+    },
+    {
+      "id": "123",
+      "name": "Test Section 3",
+      "description": "Test Section 1",
+      "has_generic_answer": false,
+      "time_duration": 12
+    },
+    {
+      "id": "123",
+      "name": "Test Section 4",
+      "description": "Test Section 1",
+      "has_generic_answer": false,
+      "time_duration": 12
+    },
+    {
+      "id": "123",
+      "name": "Test Section 5",
+      "description": "Test Section 1",
+      "has_generic_answer": false,
+      "time_duration": 12
+    }
+  ]
+}

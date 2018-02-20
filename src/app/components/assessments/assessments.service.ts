@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Assessments } from '@model/assessments/assessments';
+import { Assessments } from './assessments.model';
 
 @Injectable()
 export class AssessmentsService {
