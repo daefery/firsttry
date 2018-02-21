@@ -12,14 +12,15 @@ import { ProfileComponent } from '@comp/profile/profile.component';
 import { LoginComponent } from '@comp/login/login.component';
 import { AssessmentsComponent } from '@comp/assessments/assessments.component';
 import { PageNotFoundComponent } from '@com/page-not-found/page-not-found.component';
-import { AdminComponent } from '@comp/admin/admin.component';
 
 //custom service
 import { AssessmentsService } from '@comp/assessments/assessments.service';
-import { AdminService } from '@comp/admin/admin.service';
 
-//custom route
-import { routing } from './app.routes';
+//main route
+import { AppRoutingModule  } from './app-routing.module';
+
+//modules
+import { AdminModule } from '@comp/admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -30,16 +31,16 @@ import { routing } from './app.routes';
     ProfileComponent,
     LoginComponent,
     AssessmentsComponent,
-    PageNotFoundComponent,
-    AdminComponent
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    routing,
-    FormsModule
+    AppRoutingModule,
+    FormsModule,
+    AdminModule
   ],
-  providers: [AssessmentsService, AdminService],
+  providers: [AssessmentsService],
   bootstrap: [AppComponent, NavigationComponent, FooterComponent]
 })
 export class AppModule { }

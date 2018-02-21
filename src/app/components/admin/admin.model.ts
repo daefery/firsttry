@@ -1,13 +1,8 @@
 export class AdminSection {
-	id:string;
-    name: string;
-    description: string;
-    has_generic_answer: boolean;
-    time_duration: number;
-
-    /*constructor(ass_id:string, question: string, options: string[]) {
-    this.ass_id = ass_id;
-    this.question = question;
-    this.options = options;
-  }*/
+  constructor(
+    public id: number,
+    public name: string,
+    public description: string,
+    public has_generic_answer: boolean,
+    public time_duration: number) {};
 }
