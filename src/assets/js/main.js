@@ -1,6 +1,6 @@
 $( document ).ready(function() {
     $(".button-collapse").sideNav();
-
+    $('.modal').modal();
     var men = jQuery.parseJSON(localStorage.getItem("menus"));
     for (var i = 0; i < men.length; i++) {
 	    if(men[i].child != null){
@@ -21,4 +21,5 @@ $( document ).ready(function() {
       stopPropagation: false // Stops event propagation
     }
   );
+
 });

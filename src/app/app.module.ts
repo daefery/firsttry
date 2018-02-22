@@ -17,7 +17,7 @@ import { PageNotFoundComponent } from '@com/page-not-found/page-not-found.compon
 import { AssessmentsService } from '@comp/assessments/assessments.service';
 
 //main route
-import { AppRoutingModule  } from './app-routing.module';
+import { routing } from './app.routes';
 
 //modules
 import { AdminModule } from '@comp/admin/admin.module';
@@ -36,9 +36,9 @@ import { AdminModule } from '@comp/admin/admin.module';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
     FormsModule,
-    AdminModule
+    AdminModule,
+    routing
   ],
   providers: [AssessmentsService],
   bootstrap: [AppComponent, NavigationComponent, FooterComponent]

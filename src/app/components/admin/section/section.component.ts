@@ -1,4 +1,12 @@
-<!--   <div class="row container">
+import { Component, OnInit } from '@angular/core';
+import { NgForm, FormGroup } from '@angular/forms';
+
+import { SectionService } from './section.service'
+declare var $, Materialize, moment:any;
+
+@Component({
+	selector: 'main-section',
+	template: `<div class="row container">
       <div class="col s12 m12">
         <div class="card-panel">
           <div class="row">
@@ -73,16 +81,64 @@
             <td>{{sec.has_generic_answer}}</td>
             <td>{{sec.time_duration}}</td>
             <td>
-            	<a class="waves-effect waves-light"><i class="material-icons left">announcement</i></a>
+            	<a class="waves-effect waves-light" routerLink="{{sec.id}}"><i class="material-icons left">announcement</i></a>
             	<a class="waves-effect waves-light red-text" (click)="onDelete(sec.id)"><i class="material-icons left">close</i></a>
             </td>
           </tr>
         </tbody>
       </table>
       </div>
-    </div>
-
- -->
-
- <main-section></main-section>
+    </div>`
+})
  
+export class MainSectionComponent implements OnInit { 
+
+section_data;
+  sec = [];
+  formValid = false;
+  formSubmitted = false;
+
+  constructor(private sectionService:SectionService) { }
+
+  ngOnInit() {
+  	this.sectionService.getSection().subscribe(res => {
+      this.section_data = res;
+  	});
+  }
+
+  onSubmit(sectionForm: NgForm) {
+    Materialize.Toast.removeAll();
+    this.formSubmitted = true;
+    if(sectionForm.valid){
+      this.formValid = true;
+      this.sectionService.addSection(sectionForm.value).subscribe(res => {
+        if(res['success']){
+          this.sec = []
+          Materialize.toast('New section created.', 4000);
+          this.formSubmitted = false;
+
+          this.sectionService.getSection().subscribe(res => {
+            this.section_data = res;
+          });
+
+        }
+      });
+    }
+  }
+
+  onDelete(id){
+    Materialize.Toast.removeAll();
+    this.sectionService.deleteSection(id).subscribe(res => {
+      if(res['success']){
+        this.sec = []
+        Materialize.toast('Section deleted.', 4000);
+
+        this.sectionService.getSection().subscribe(res => {
+          this.section_data = res;
+        });
+
+      }
+    });
+  }
+
+}

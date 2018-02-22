@@ -2,27 +2,29 @@ import { NgModule }       from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
-import { AdminComponent } from '@comp/admin/admin.component';
-import { SectionDetailComponent } from '@comp/admin/section-detail.component';
-import { MainSectionComponent } from './section.component';
-import { AdminService } from '@comp/admin/admin.service';
-import { AdminRoutingModule } from './admin-routing.module';
+import { AdminComponent }    from './admin.component';
+import { MainSectionComponent }    from './section/section.component';
+import { SectionDetailComponent }    from './section/section-detail.component';
+
+import { SectionService } from './section/section.service';
+import { AdminGlobal } from './admin-global.service';
 
 
 @NgModule({
   declarations: [
-  AdminComponent,
-  SectionDetailComponent,
-  MainSectionComponent
+    AdminComponent,
+    SectionDetailComponent,
+    MainSectionComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AdminRoutingModule
+    RouterModule
   ],
-  providers: [ AdminService ],
-  bootstrap: [ AdminComponent ]
+  providers: [ SectionService, AdminGlobal ],
+  bootstrap: []
 })
 export class AdminModule { }
