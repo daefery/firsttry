@@ -7,16 +7,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent }    from './admin.component';
 import { MainSectionComponent }    from './section/section.component';
 import { SectionDetailComponent }    from './section/section-detail.component';
+import { QuestionDetailComponent } from './section/question-detail.component';
 
 import { SectionService } from './section/section.service';
-import { AdminGlobal } from './admin-global.service';
 
 
 @NgModule({
   declarations: [
     AdminComponent,
     SectionDetailComponent,
-    MainSectionComponent
+    MainSectionComponent,
+    QuestionDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +25,7 @@ import { AdminGlobal } from './admin-global.service';
     FormsModule,
     RouterModule
   ],
-  providers: [ SectionService, AdminGlobal ],
+  providers: [ SectionService ],
   bootstrap: []
 })
 export class AdminModule { }

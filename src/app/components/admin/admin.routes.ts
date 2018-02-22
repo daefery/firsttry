@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { AdminComponent }    from './admin.component';
 import { MainSectionComponent }    from './section/section.component';
 import { SectionDetailComponent }    from './section/section-detail.component';
+import { QuestionDetailComponent } from './section/question-detail.component';
 
 // Route Configuration
 export const adminRoutes: Routes = [
@@ -10,8 +11,7 @@ export const adminRoutes: Routes = [
 		children: [
 			{path: 'section', component: MainSectionComponent}, 
 			{path: 'section/:id', component: SectionDetailComponent}, 
-			{path: 'question', component: MainSectionComponent}, 
-			{path: 'question/:id', component: SectionDetailComponent}
+			{path: 'question/:id', component: QuestionDetailComponent}
 		]
 	}
 ];
