@@ -75,12 +75,18 @@ export class SectionService {
 
 	addAnswer(data, ids) {
 		let headers =  {headers: new  HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded'})};
+		let query;
 		let httpParams = new HttpParams()
 		.set('name', data.name)
 		.set('value', data.value)
 		.set('section_id', ids.section_id)
 		.set('question_id', ids.question_id);
-	    return this.http.post(this.path_url+'answer', httpParams, headers);
+
+		if(data.id != null && data.id != undefined && data.id != ""){
+	    	return this.http.post(this.path_url+'answer/'+data.id, httpParams, headers);
+		}
+
+		return this.http.post(this.path_url+'answer', httpParams, headers);;
 	}
 
 }

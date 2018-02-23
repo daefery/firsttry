@@ -14,12 +14,15 @@ declare var $, Materialize, moment:any;
           <h5>Question Information</h5>
           <p>Name : <b>{{qs.name}}</b></p>
           <p>Grade : <b>{{qs.grade}}</b></p>
+          <a class="waves-effect waves-light" routerLink="/admin/section/{{qs.section_id}}">Back to question</a>
+
         </div>
         <div class="col s12 m6">
           <div class="card-panel red darken-2" *ngIf="!formValid && formSubmitted">
               <b class="white-text">Please complete the form.</b>
           </div>
           <form class="col s12" (ngSubmit)="onSubmit(answerForm)" #answerForm="ngForm" novalidate>
+            <input id="id" type="hidden" [(ngModel)]="m_answer.id" name="id">
             <div class="row">
               <div class="input-field col s12">
                 <input id="question_name" type="text" [(ngModel)]="m_answer.name" name="name" required>
@@ -34,7 +37,6 @@ declare var $, Materialize, moment:any;
             </div>
             <div class="row">
               <div class="input-field col 12 right">
-                <button class="waves-effect waves-light btn" type="button" (click)="showAnswerForm(false)">Cancel</button>
                 <button class="waves-effect waves-light btn" type="submit">Add Answer</button>
               </div>
             </div>
@@ -50,12 +52,12 @@ declare var $, Materialize, moment:any;
         </thead>
 
         <tbody>
-          <tr *ngFor="let qs of answers; let i = index" style="">
-            <td>{{qs.name}}</td>
-            <td>{{qs.value}}</td>
+          <tr *ngFor="let ans of answers; let i = index" style="">
+            <td>{{ans.name}}</td>
+            <td>{{ans.value}}</td>
             <td>
-            	<a class="waves-effect waves-light" (click)="onAction(qs)"><i class="material-icons left">edit</i></a>
-              <a class="waves-effect waves-light red-text" (click)="onDelete(qs.id)"><i class="material-icons left">close</i></a>
+            	<a class="waves-effect waves-light" (click)="onAction(ans)"><i class="material-icons left">edit</i></a>
+              <a class="waves-effect waves-light red-text" (click)="onDelete(ans.id)"><i class="material-icons left">close</i></a>
             </td>
           </tr>
         </tbody>
@@ -84,28 +86,34 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
         section_id:resFirst.section_id,
         question_id:resFirst.id
       }
-      console.log(dat);
 
-      this.subscription2 = this.sectionService.getAnswerByQuestionId(dat).subscribe(res => {
-        this.answers = res;
+      this.subscription2 = this.sectionService.getAnswerByQuestionId(dat).subscribe(answerResponse => {
+      console.log(answerResponse);
+        this.answers = answerResponse;
       });
     });
 	}
 
   onSubmit(answerForm: NgForm){
+    console.log(this.formSubmitted);
+    console.log(this.formValid);
+    let dat = {
+      section_id:this.question[0].section_id,
+      question_id:this.question[0].id
+    }
     Materialize.Toast.removeAll();
     this.formSubmitted = true;
+    this.formValid = answerForm.valid;
     if(answerForm.valid){
-      this.formValid = true;
       this.sectionService.addAnswer(answerForm.value, dat).subscribe(res => {
         if(res['success']){
-          this.m_answer = []
-          Materialize.toast('New answer created.', 4000);
-          this.formSubmitted = false;
-          let dat = {
-            section_id:this.question[0].section_id,
-            question_id:this.question[0].id
+          if(answerForm.value.id != null && answerForm.value.id != undefined && answerForm.value.id != ""){
+            Materialize.toast('Answer updated.', 4000);
+          }else{
+            Materialize.toast('New answer created.', 4000);
           }
+          this.m_answer = [];
+          this.formSubmitted = false;
           this.subscription2 = this.sectionService.getAnswerByQuestionId(dat).subscribe(res => {
             this.answers = res;
           });
@@ -140,8 +148,9 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
       label1[0].classList.value = 'active';
       label2[0].classList.value = 'active';
     }
-   // this.m_answer.name = data.name;
-  //  this.m_answer.value = data.value;
+   this.m_answer.id = data.id;
+   this.m_answer.name = data.name;
+   this.m_answer.value = data.value;
   }
 
   ngOnDestroy() {

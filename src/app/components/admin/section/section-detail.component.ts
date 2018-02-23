@@ -57,9 +57,9 @@ declare var $, Materialize, moment:any;
             <td>{{qs.name}}</td>
             <td>{{qs.grade}}</td>
             <td>
-            	<a class="waves-effect waves-light" routerLink="/admin/question/{{qs.id}}"><i class="material-icons left">announcement</i></a>
+            	<a class="waves-effect waves-light" (click)="onedit()"><i class="material-icons left">edit</i></a>
               <a class="waves-effect waves-light red-text" (click)="onDelete(qs.id)"><i class="material-icons left">close</i></a>
-            	<a *ngIf="section_detail[0].has_generic_answer != 'true'" class="waves-effect waves-light green-text" (click)="showAnswerForm(true, qs.id)"><i class="material-icons left">chat</i></a>
+              <a *ngIf="section.has_generic_answer != 'true'" class="waves-effect waves-light green-text" routerLink="/admin/question/{{qs.id}}"><i class="material-icons left">chat</i></a>
             </td>
           </tr>
         </tbody>
@@ -73,7 +73,8 @@ export class SectionDetailComponent implements OnInit, OnDestroy {
   private subscription: ISubscription;
   private subscription2: ISubscription;
   questions;
-	section_detail:Section;
+  section_detail:Section;
+	section;
   section_id:number;
   question_id:number;
   formValid = false;
@@ -84,7 +85,7 @@ export class SectionDetailComponent implements OnInit, OnDestroy {
   	this.section_id = this.router.snapshot.params.id;
     this.subscription = this.sectionService.getSectionById(this.section_id).subscribe(res => {
       this.section_detail = res;
-      console.log(this.section_detail[0]);
+      this.section = res[0];
     });
     this.subscription2 = this.sectionService.getQuestionBySectionId(this.section_id).subscribe(res => {
       this.questions = res;
