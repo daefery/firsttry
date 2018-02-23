@@ -30,7 +30,7 @@ declare var $, Materialize, moment:any;
 		      </div>
 		      <div class="row">
 		      	<div class="input-field col s12">
-		          <label for="hgaLabel">Has Generic Answer? {{has_generic_answer}}</label>
+		          <label for="hgaLabel">Has Generic Answer?</label>
 		        </div>
 		      </div>
 		      <div class="row">

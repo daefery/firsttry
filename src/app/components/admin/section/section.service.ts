@@ -9,8 +9,8 @@ import { Question } from './question.model';
 
 @Injectable()
 export class SectionService {
-	path_url = 'http://localhost:8080/weddings-server/api/v1/';
-	question_url = 'http://localhost:8080/weddings-server/api/v1/question';
+	path_url = 'https://api.ferde.id/api/v1/';
+
 	constructor(private http: HttpClient) { }
 
   	getSection(): Observable<Section[]> {
@@ -43,7 +43,7 @@ export class SectionService {
 		let headers =  {headers: new  HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded'})};
 		let httpParams = new HttpParams()
 		.set('section_id', id);
-		return this.http.post('http://localhost:8080/weddings-server/api/v1/questionsection', httpParams, headers);
+		return this.http.post(this.path_url+'questionsection', httpParams, headers);
 	}
 
 	getQuestionById(id){
@@ -72,7 +72,7 @@ export class SectionService {
 		let httpParams = new HttpParams()
 		.set('section_id', data.section_id)
 		.set('question_id', data.question_id);
-		return this.http.post('http://localhost:8080/weddings-server/api/v1/answerquestion', httpParams, headers);
+		return this.http.post(this.path_url+'answerquestion', httpParams, headers);
 	}
 
 	deleteAnswer(param:number){
