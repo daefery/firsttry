@@ -116,8 +116,12 @@ section_data;
       this.formValid = true;
       this.sectionService.addSection(sectionForm.value).subscribe(res => {
         if(res['success']){
+          if(sectionForm.value.id != null && sectionForm.value.id != undefined && sectionForm.value.id != ""){
+            Materialize.toast('Section updated.', 4000);
+          }else{
+            Materialize.toast('New section created.', 4000);
+          }
           this.sec = []
-          Materialize.toast('New section created.', 4000);
           this.formSubmitted = false;
 
           this.sectionService.getSection().subscribe(res => {
@@ -156,7 +160,11 @@ section_data;
       this.sec.id = data.id;
       this.sec.name = data.name;
       this.sec.description = data.description;
-      this.sec.has_generic_answer = data.has_generic_answer;
+      if(data.has_generic_answer == 'true'){
+        this.sec.has_generic_answer = true;
+      }else{
+        this.sec.has_generic_answer = false;
+      }
       this.sec.time_duration = data.time_duration;
     }
   }

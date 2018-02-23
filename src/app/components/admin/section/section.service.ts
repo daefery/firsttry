@@ -29,6 +29,9 @@ export class SectionService {
 		.set('has_generic_answer', data.has_generic_answer)
 		.set('time_duration', data.time_duration);
 	    
+	    if(data.id != null && data.id != undefined && data.id != ""){
+	    	return this.http.post(this.path_url+'section/'+data.id, httpParams, headers);
+		}
 	    return this.http.post(this.path_url+'section', httpParams, headers);
 	}
 
