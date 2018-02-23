@@ -15,6 +15,7 @@ declare var $, Materialize, moment:any;
 	      		<b class="white-text">Please complete the form.</b>
 	      	</div>
 		    <form class="col s12" (ngSubmit)="onSubmit(sectionForm)" #sectionForm="ngForm" novalidate>
+          <input id="id" type="hidden" [(ngModel)]="sec.id" name="id">
 		      <div class="row">
 		        <div class="input-field col s12">
 		          <input id="section_name" type="text" [(ngModel)]="sec.name" name="name" required>
@@ -35,13 +36,13 @@ declare var $, Materialize, moment:any;
 		      <div class="row">
 		        <div class="col s6">
 		        	<p>
-				      <input name="has_generic_answer" type="radio" id="hga1" [value]="true" [(ngModel)]="sec.has_generic_answer" required />
+				      <input name="has_generic_answer" type="radio" class="with-gap" id="hga1" [value]="true" [(ngModel)]="sec.has_generic_answer" required />
 				      <label for="hga1">Yes</label>
 				    </p>
 		        </div>
 		        <div class="col s6">
 				    <p>
-				      <input name="has_generic_answer" type="radio" id="hga2" [value]="false" [(ngModel)]="sec.has_generic_answer" required/>
+				      <input name="has_generic_answer" type="radio" class="with-gap" id="hga2" [value]="false" [(ngModel)]="sec.has_generic_answer" required/>
 				      <label for="hga2">No</label>
 				    </p>
 		        </div>
@@ -81,7 +82,8 @@ declare var $, Materialize, moment:any;
             <td>{{sec.has_generic_answer}}</td>
             <td>{{sec.time_duration}}</td>
             <td>
-            	<a class="waves-effect waves-light" routerLink="{{sec.id}}"><i class="material-icons left">announcement</i></a>
+              <a class="waves-effect waves-light" routerLink="{{sec.id}}"><i class="material-icons left">announcement</i></a>
+            	<a class="waves-effect waves-light green-text" (click)="onAction(sec)"><i class="material-icons left">edit</i></a>
             	<a class="waves-effect waves-light red-text" (click)="onDelete(sec.id)"><i class="material-icons left">close</i></a>
             </td>
           </tr>
@@ -94,13 +96,14 @@ declare var $, Materialize, moment:any;
 export class MainSectionComponent implements OnInit { 
 
 section_data;
-  sec = [];
+  sec;
   formValid = false;
   formSubmitted = false;
 
   constructor(private sectionService:SectionService) { }
 
   ngOnInit() {
+    this.sec = [];
   	this.sectionService.getSection().subscribe(res => {
       this.section_data = res;
   	});
@@ -139,6 +142,23 @@ section_data;
 
       }
     });
+  }
+
+  onAction(data){
+    var label1 = $("label[for='section_name']");
+    var label2 = $("label[for='description']");
+    var label3 = $("label[for='time_duration']");
+    if (label1 && label2) {
+      label1[0].classList.value = 'active';
+      label2[0].classList.value = 'active';
+      label3[0].classList.value = 'active';
+
+      this.sec.id = data.id;
+      this.sec.name = data.name;
+      this.sec.description = data.description;
+      this.sec.has_generic_answer = data.has_generic_answer;
+      this.sec.time_duration = data.time_duration;
+    }
   }
 
 }

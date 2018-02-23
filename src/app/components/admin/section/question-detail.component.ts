@@ -25,8 +25,8 @@ declare var $, Materialize, moment:any;
             <input id="id" type="hidden" [(ngModel)]="m_answer.id" name="id">
             <div class="row">
               <div class="input-field col s12">
-                <input id="question_name" type="text" [(ngModel)]="m_answer.name" name="name" required>
-                <label for="question_name">Answer Name</label>
+                <input id="answer_name" type="text" [(ngModel)]="m_answer.name" name="name" required>
+                <label for="answer_name">Answer Name</label>
               </div>
             </div>
             <div class="row">
@@ -67,7 +67,7 @@ declare var $, Materialize, moment:any;
 })
  
 export class QuestionDetailComponent implements OnInit, OnDestroy { 
-  m_answer = [];
+  m_answer;
   private subscription: ISubscription;
   private subscription2: ISubscription;
   answers;
@@ -78,6 +78,7 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
   constructor(private router:ActivatedRoute, private sectionService:SectionService) { }
 	
   ngOnInit() {
+    this.m_answer = [];
     this.question_id = this.router.snapshot.params.id;
     this.subscription = this.sectionService.getQuestionById(this.question_id).subscribe(res => {
       this.question = res;
@@ -88,15 +89,12 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
       }
 
       this.subscription2 = this.sectionService.getAnswerByQuestionId(dat).subscribe(answerResponse => {
-      console.log(answerResponse);
         this.answers = answerResponse;
       });
     });
 	}
 
   onSubmit(answerForm: NgForm){
-    console.log(this.formSubmitted);
-    console.log(this.formValid);
     let dat = {
       section_id:this.question[0].section_id,
       question_id:this.question[0].id
@@ -142,15 +140,17 @@ export class QuestionDetailComponent implements OnInit, OnDestroy {
   }
 
   onAction(data){
-    var label1 = $("label[for='question_name']");
+    var label1 = $("label[for='answer_name']");
     var label2 = $("label[for='value']");
     if (label1 && label2) {
       label1[0].classList.value = 'active';
       label2[0].classList.value = 'active';
+
+      this.m_answer.id = data.id;
+      this.m_answer.name = data.name;
+      this.m_answer.value = data.value;
     }
-   this.m_answer.id = data.id;
-   this.m_answer.name = data.name;
-   this.m_answer.value = data.value;
+   
   }
 
   ngOnDestroy() {

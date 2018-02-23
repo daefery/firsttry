@@ -22,6 +22,7 @@ declare var $, Materialize, moment:any;
               <b class="white-text">Please complete the form.</b>
           </div>
           <form class="col s12" (ngSubmit)="onSubmit(questionForm)" #questionForm="ngForm" novalidate>
+            <input id="id" type="hidden" [(ngModel)]="m_qs.id" name="id">
             <div class="row">
               <div class="input-field col s12">
                 <input id="question_name" type="text" [(ngModel)]="m_qs.name" name="name" required>
@@ -57,7 +58,7 @@ declare var $, Materialize, moment:any;
             <td>{{qs.name}}</td>
             <td>{{qs.grade}}</td>
             <td>
-            	<a class="waves-effect waves-light" (click)="onedit()"><i class="material-icons left">edit</i></a>
+            	<a class="waves-effect waves-light" (click)="onAction(qs)"><i class="material-icons left">edit</i></a>
               <a class="waves-effect waves-light red-text" (click)="onDelete(qs.id)"><i class="material-icons left">close</i></a>
               <a *ngIf="section.has_generic_answer != 'true'" class="waves-effect waves-light green-text" routerLink="/admin/question/{{qs.id}}"><i class="material-icons left">chat</i></a>
             </td>
@@ -69,12 +70,12 @@ declare var $, Materialize, moment:any;
 })
  
 export class SectionDetailComponent implements OnInit, OnDestroy { 
-  m_qs = [];
+  m_qs;
   private subscription: ISubscription;
   private subscription2: ISubscription;
   questions;
   section_detail:Section;
-	section;
+	section:any;
   section_id:number;
   question_id:number;
   formValid = false;
@@ -82,6 +83,8 @@ export class SectionDetailComponent implements OnInit, OnDestroy {
   constructor(private router:ActivatedRoute, private sectionService:SectionService) { }
 	
   ngOnInit() {
+    this.m_qs = [];
+    this.section = [];
   	this.section_id = this.router.snapshot.params.id;
     this.subscription = this.sectionService.getSectionById(this.section_id).subscribe(res => {
       this.section_detail = res;
@@ -99,8 +102,12 @@ export class SectionDetailComponent implements OnInit, OnDestroy {
       this.formValid = true;
       this.sectionService.addQuestion(questionForm.value, this.section_id).subscribe(res => {
         if(res['success']){
+          if(questionForm.value.id != null && questionForm.value.id != undefined && questionForm.value.id != ""){
+            Materialize.toast('Question updated.', 4000);
+          }else{
+            Materialize.toast('New question created.', 4000);
+          }
           this.m_qs = []
-          Materialize.toast('New question created.', 4000);
           this.formSubmitted = false;
 
           this.subscription2 = this.sectionService.getQuestionBySectionId(this.section_id).subscribe(res => {
@@ -126,8 +133,22 @@ export class SectionDetailComponent implements OnInit, OnDestroy {
     });
   }
 
+  onAction(data){
+    var label1 = $("label[for='question_name']");
+    var label2 = $("label[for='grade']");
+    if (label1 && label2) {
+      label1[0].classList.value = 'active';
+      label2[0].classList.value = 'active';
+
+      this.m_qs.id = data.id;
+      this.m_qs.name = data.name;
+      this.m_qs.grade = data.grade;
+    }
+   
+  }
+
   ngOnDestroy() {
-    this.subscription.unsubscribe();
-    this.subscription2.unsubscribe();
+  //  this.subscription.unsubscribe();
+  //  this.subscription2.unsubscribe();
   }
 }

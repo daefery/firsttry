@@ -53,7 +53,10 @@ export class SectionService {
 		.set('name', data.name)
 		.set('grade', data.grade)
 		.set('section_id', id);
-	    
+
+	    if(data.id != null && data.id != undefined && data.id != ""){
+	    	return this.http.post(this.path_url+'question/'+data.id, httpParams, headers);
+		}
 	    return this.http.post(this.path_url+'question', httpParams, headers);
 	}
 
