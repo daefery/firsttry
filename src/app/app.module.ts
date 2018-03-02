@@ -2,7 +2,7 @@ import { NgModule }       from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent }         from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //custom component
 import { NavigationComponent } from '@com/navigation/navigation.component';
@@ -21,6 +21,8 @@ import { routing } from './app.routes';
 
 //modules
 import { AdminModule } from '@comp/admin/admin.module';
+import { TestModule } from './test/test.module';
+import { DynamicFormModule } from '@com/dynamic-form/dynamic-form.module';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { AdminModule } from '@comp/admin/admin.module';
     HttpClientModule,
     FormsModule,
     AdminModule,
-    routing
+    TestModule,
+    routing,
+    DynamicFormModule
   ],
   providers: [AssessmentsService],
   bootstrap: [AppComponent, NavigationComponent, FooterComponent]

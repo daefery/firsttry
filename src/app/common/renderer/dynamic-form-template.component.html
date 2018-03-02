@@ -1,0 +1,59 @@
+<form class="col s12" #dynamicForm="ngForm" (ngSubmit)="onSubmit(dynamicForm)" novalidate>
+  <div class="row" *ngFor="let form of formList.data; let i = index">
+
+    <div *ngIf="form.type == 'section'">
+      <h5>{{form.label}}</h5>
+    </div>
+    <div *ngFor="let prop of form.values; let j = index" class="{{prop.div_class}}">
+
+        <label *ngIf="prop.type != 'button'" [for]="prop.name">{{prop.label}}</label>
+
+        <input *ngIf="prop.type == 'text'" 
+        [id]="prop.name" 
+        [name]="prop.name" 
+        [type]="prop.type" 
+        [class]="prop.input_class" required ngModel>
+
+        <input *ngIf="prop.type == 'email'" 
+        [id]="prop.name" 
+        [name]="prop.name" 
+        [type]="prop.type" 
+        [class]="prop.input_class" ngModel>
+
+        <input *ngIf="prop.type == 'password'" 
+        [id]="prop.name" 
+        [name]="prop.name" 
+        [type]="prop.type" 
+        [class]="prop.input_class" ngModel>
+
+        <input *ngIf="prop.type == 'number'" 
+        [id]="prop.name" 
+        [name]="prop.name" 
+        [type]="prop.type" 
+        [class]="prop.input_class" ngModel>
+
+        <input *ngIf="prop.type == 'date'" 
+        [id]="prop.name" 
+        [name]="prop.name" 
+        [type]="prop.type" ngModel>
+
+        <textarea *ngIf="prop.type == 'textarea'" [id]="prop.name" [name]="prop.name" class="materialize-textarea" ngModel></textarea>
+     
+        <button *ngIf="prop.type == 'button'" type="submit" [id]="prop.name" [class]="prop.input_class">{{prop.label}}</button>
+        
+        <select *ngIf="prop.type == 'select'" 
+          [name]="prop.name" 
+          (change)="getType($event.target.value)" 
+          class="browser-default" ngModel
+          [id]="prop.name">
+            <option value="" disabled selected>{{prop.alternative_text}}</option>
+            <option *ngFor="let opt of prop.values; let k = index" [value]="opt.value">{{opt.label}}</option>
+        </select>
+        
+    </div>
+
+    <div *ngIf="form.type == 'section'">
+      <hr class="hr-form">
+    </div>
+  </div>
+</form>

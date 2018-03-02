@@ -11,6 +11,7 @@ import { AdminComponent }    from '@comp/admin/admin.component';
 
 //route
  import { adminRoutes } from '@comp/admin/admin.routes'
+ import { TestRoutes } from './test/test.routes'
 
 // Route Configuration
 export const routes: Routes = [
@@ -20,6 +21,7 @@ export const routes: Routes = [
   { path: 'assessments/:id',component: AssessmentsComponent },
   { path: 'login',component: LoginComponent },
   ...adminRoutes,
+  ...TestRoutes,
   { path: '**',component: PageNotFoundComponent },
   
 ];

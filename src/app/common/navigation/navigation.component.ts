@@ -24,6 +24,7 @@ constructor() {
       new Navigation("h02", "Science", "profile", null),
       new Navigation("h03", "Assessments", "profile", null),
       new Navigation("h03", "Admin", "admin", null),
+      new Navigation("h03", "Test", "test", null),
     ];
     localStorage.setItem("menus", JSON.stringify(this.parent));
   }
