@@ -1,0 +1,18 @@
+{
+    "data":[
+        {"id":"Pengajaran Bahasa Inggris sebagai Bahasa Asing", "name":"Pengajaran Bahasa Inggris sebagai Bahasa Asing"},
+        {"id":"Pengajaran Bahasa Inggris kepada Penutur Bahasa Lain", "name":"Pengajaran Bahasa Inggris kepada Penutur Bahasa Lain"},
+        {"id":"Pendidikan bagi Orang Dewasa", "name":"Pendidikan bagi Orang Dewasa"},
+        {"id":"Pengembangan Profesi Berkesinambungan", "name":"Pengembangan Profesi Berkesinambungan"},
+        {"id":"Perubahan Karir", "name":"Perubahan Karir"},
+        {"id":"Psikologi Pendidikan", "name":"Psikologi Pendidikan"},
+        {"id":"Pendidikan Khusus", "name":"Pendidikan Khusus"},
+        {"id":"Penelitian Pendidikan", "name":"Penelitian Pendidikan"},
+        {"id":"PGCE", "name":"PGCE"},
+        {"id":"Pelatihan Guru", "name":"Pelatihan Guru"},
+        {"id":"Pembelajaran Pendidikan", "name":"Pembelajaran Pendidikan"},
+        {"id":"Bimbingan Konseling tentang Karir", "name":"Bimbingan Konseling tentang Karir"},
+        {"id":"Manajemen Pendidikan", "name":"Manajemen Pendidikan"},
+        {"id":"Pedagogi", "name":"Pedagogi"}
+    ]
+}

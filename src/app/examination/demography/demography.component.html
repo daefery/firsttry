@@ -1,0 +1,184 @@
+<div class="row container">
+    <div class="card white">
+		<div class="card-content">
+	  		<span class="card-title"><h3>Demography</h3></span>
+			<hr class="hr-form"><br>
+			<div class="progress">
+				<div class="determinate" id="formProgress" style="width: 0%"></div>
+				<div class="progress-text">
+					<h4 class="center-align">{{formSectionName}}</h4>
+				</div>
+			</div>
+			<div class="row">
+				<form class="col s12" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+					<div *ngFor="let mainProp of dataForm;let main_index = index" id="section_{{main_index+1}}" [hidden]="main_index != 0">
+						<br>
+				      	<!-- <h5><i class="material-icons">arrow_forward</i> {{mainProp.section_name}}</h5> -->
+						<!-- <hr class="hr-form"> -->
+						<div class="row" *ngFor="let prop of mainProp.data">
+							<div *ngFor="let propChild of prop.values" class="col s{{12/prop.values.length}} m{{12/prop.values.length}}">
+
+								<div *ngIf="propChild.child == undefined">
+									<label *ngIf="propChild.type !='checkbox'" for="{{propChild.name}}" [ngClass]="{'red-text text-darken-2':form.controls[propChild.name].invalid && (form.controls[propChild.name].dirty || submitted)}">{{propChild.label}}</label>
+								</div>
+								<div *ngIf="propChild.child != undefined">
+									<div *ngIf="form.controls['child_'+propChild.name].value">
+										<label for="{{propChild.name}}" [ngClass]="{'red-text text-darken-2':form.controls['input_'+propChild.name].invalid && (form.controls['input_'+propChild.name].dirty || submitted)}">{{propChild.label}}</label>
+									</div>
+									<div *ngIf="!form.controls['child_'+propChild.name].value">
+										<label *ngIf="propChild.type !='checkbox'" for="{{propChild.name}}" [ngClass]="{'red-text text-darken-2':form.controls[propChild.name].invalid && (form.controls[propChild.name].dirty || submitted)}">{{propChild.label}}</label>
+									</div>
+								</div>
+					          
+					          <input *ngIf="propChild.type != 'select' && propChild.type != 'textarea'" 
+					          	placeholder="{{propChild.placeholder}}" 
+					          	id="{{propChild.name}}" 
+					          	type="{{propChild.type}}" 
+					          	[ngClass]="{'invalid':form.controls[propChild.name].invalid && (form.controls[propChild.name].dirty || submitted)}"
+					          	class="{{propChild.class}}"
+					          	formControlName="{{propChild.name}}">
+					          	
+					          	<div *ngIf="propChild.type == 'select'">
+									<ng-select *ngIf="propChild.child == undefined && propChild.options.length > 0" 
+									  [items]="propChild.options" 
+					          			id="{{propChild.name}}"
+				          				(change)="onChange(propChild.onchange, $event)"
+										bindLabel="name"
+										bindValue="id"
+										dropdownPosition="auto"
+										formControlName="{{propChild.name}}"
+										placeholder="{{propChild.placeholder}}"
+										[ngClass]="{'invalid':form.controls[propChild.name].invalid && (form.controls[propChild.name].dirty || submitted)}"
+										class="custom">
+							        </ng-select>
+							        <ng-select [items]="propChild.options" *ngIf="propChild.child != undefined && propChild.options.length > 0" 
+							        	id="{{propChild.name}}"
+										(change)="onChange(propChild.onchange, $event)"
+										bindLabel="name"
+										bindValue="id"
+										dropdownPosition="auto"
+										formControlName="{{propChild.name}}"
+										placeholder="{{propChild.placeholder}}"
+									  	[ngClass]="{'invalid':form.controls[propChild.name].invalid && (form.controls[propChild.name].dirty || submitted) && !form.controls['child_'+propChild.name].value}"
+										class="custom">
+									</ng-select>
+									<ng-select [items]="OldDistrict" *ngIf="propChild.name == 'old_district'" 
+										id="{{propChild.name}}"
+										bindLabel="name"
+										bindValue="id"
+										dropdownPosition="auto"
+										formControlName="{{propChild.name}}"
+										placeholder="{{propChild.placeholder}}"
+										[ngClass]="{'invalid':form.controls[propChild.name].invalid && (form.controls[propChild.name].dirty || submitted)}"
+										class="custom">
+									</ng-select>
+									<ng-select [items]="NewDistrict" *ngIf="propChild.name == 'new_district'" 
+										id="{{propChild.name}}"
+										bindLabel="name"
+										bindValue="id"
+										dropdownPosition="auto"
+										formControlName="{{propChild.name}}"
+										placeholder="{{propChild.placeholder}}"
+										[ngClass]="{'invalid':form.controls[propChild.name].invalid && (form.controls[propChild.name].dirty || submitted)}"
+										class="custom">
+									</ng-select>
+									<ng-select [items]="Prodi" *ngIf="propChild.name == 'next_prody'" 
+										id="{{propChild.name}}"
+										bindLabel="name"
+										bindValue="id"
+										dropdownPosition="auto"
+										formControlName="{{propChild.name}}"
+										placeholder="{{propChild.placeholder}}"
+									  	[ngClass]="{'invalid':form.controls[propChild.name].invalid && (form.controls[propChild.name].dirty || submitted) && !form.controls['child_'+propChild.name].value}"
+										class="custom">
+									</ng-select>
+									
+							        <!-- <select formControlName="{{propChild.name}}" *ngIf="propChild.child == undefined"
+									  	id="{{propChild.name}}" (ngModelChange)="onChange(propChild.onchange, $event)"
+									  	[ngClass]="{'invalid':form.controls[propChild.name].invalid && (form.controls[propChild.name].dirty || submitted)}"
+									  	class="browser-default">
+								  		<input type="text" name="test">
+									    <option value="" disabled selected>{{propChild.placeholder}}</option>
+									    <option *ngFor="let opt of propChild.options" [value]="opt.label">{{opt.label}}</option>
+									</select> -->
+									<!-- <select formControlName="{{propChild.name}}" *ngIf="propChild.child != undefined"
+									  	id="{{propChild.name}}" 
+									  	[ngClass]="{'invalid':form.controls[propChild.name].invalid && (form.controls[propChild.name].dirty || submitted) && !form.controls['child_'+propChild.name].value}"
+									  	class="browser-default">
+									    <option value="" disabled selected>{{propChild.placeholder}}</option>
+									    <option *ngFor="let opt of propChild.options" [value]="opt.value">{{opt.label}}</option>
+									</select> -->
+									<div *ngIf="propChild.child != undefined" style="margin-top: 10px;">
+										<input type="checkbox" class="filled-in" id="child_{{propChild.name}}" formControlName="child_{{propChild.name}}" (change)="CheckValue(propChild, $event.target.checked)"/>
+	      								<label for="child_{{propChild.name}}">{{propChild.child.label}}</label>
+	      								<input [ngClass]="{'invalid':form.controls['input_'+propChild.name].invalid && form.controls['child_'+propChild.name].value && (form.controls['input_'+propChild.name].dirty || submitted)}" type="text" formControlName="input_{{propChild.name}}" placeholder="{{propChild.child.placeholder}}" id="input_{{propChild.name}}"
+	      								style="display:none">	
+									</div>
+								</div>
+
+								<textarea [placeholder]="propChild.placeholder" 
+								*ngIf="propChild.type == 'textarea'" 
+								[id]="propChild.name" [formControlName]="propChild.name" 
+								class="{{propChild.class}}"
+								[ngClass]="{'invalid':form.controls[propChild.name].invalid && (form.controls[propChild.name].dirty || submitted)}"></textarea>
+
+								<div *ngIf="(form.controls[propChild.name].dirty || submitted) && propChild.child == undefined">
+									<label class="red-text text-darken-2" *ngIf="form.controls[propChild.name].hasError('required')">
+									    {{propChild.label}} harus diisi.
+								  	</label>
+								  	<label class="red-text text-darken-2" *ngIf="form.controls[propChild.name].hasError('pattern')">
+									    Format {{propChild.label}} salah.
+								  	</label>
+								  	<label class="red-text text-darken-2" *ngIf="form.controls[propChild.name].hasError('minLength')">
+									    {{propChild.label}} minimal {{form.controls[propChild.name].minLength}}.
+								  	</label>
+								  	<label class="red-text text-darken-2" *ngIf="form.controls[propChild.name].hasError('maxLength')">
+									    {{propChild.label}} maksimal {{form.controls[propChild.name].maxLength}}.
+								  	</label>
+								</div>
+
+								<div *ngIf="propChild.child != undefined">
+									<div *ngIf="form.controls['child_'+propChild.name].value">
+										<div *ngIf="form.controls['input_'+propChild.name].dirty || submitted">
+												<label class="red-text text-darken-2" *ngIf="form.controls['input_'+propChild.name].hasError('required')">
+											    {{propChild.label}} harus diisi.
+											  	</label>
+											  	<label class="red-text text-darken-2" *ngIf="form.controls['input_'+propChild.name].hasError('pattern')">
+												    Format {{'input_'+propChild.label}} salah.
+											  	</label>
+										</div>
+									</div>
+									<div *ngIf="!form.controls['child_'+propChild.name].value">
+										<div *ngIf="form.controls[propChild.name].dirty || submitted">
+											<label class="red-text text-darken-2" *ngIf="form.controls[propChild.name].hasError('required')">
+										    {{propChild.label}} harus diisi.
+										  	</label>
+										  	<label class="red-text text-darken-2" *ngIf="form.controls[propChild.name].hasError('pattern')">
+											    Format {{propChild.label}} salah.
+										  	</label>
+										  	<label class="red-text text-darken-2" *ngIf="form.controls[propChild.name].hasError('minLength')">
+											    {{propChild.label}} minimal {{form.controls[propChild.name].minLength}}.
+										  	</label>
+										  	<label class="red-text text-darken-2" *ngIf="form.controls[propChild.name].hasError('maxLength')">
+											    {{propChild.label}} maksimal {{form.controls[propChild.name].maxLength}}.
+										  	</label>
+										</div>
+									</div>
+								</div>
+								
+					        </div>
+						</div>
+					</div>
+
+		        	<button type="submit" style="display: none" id="demo_btn"></button>
+			    </form>
+			</div>
+		</div>
+		<div class="card-action">
+		  <a *ngIf="sectionCount > 1" class="waves-effect waves-light btn" (click)="Back()"><i class="material-icons left">arrow_back</i>Sebelumnya</a>
+		  <a *ngIf="sectionCount != 6" class="waves-effect waves-light btn" (click)="Next()"><i class="material-icons right">arrow_forward</i>Selanjutnya</a>
+		  <a *ngIf="sectionCount == 6" class="waves-effect waves-light btn" (click)="Next()"><i class="material-icons right">arrow_forward</i>Selesai</a>
+		</div>
+	</div>
+</div>

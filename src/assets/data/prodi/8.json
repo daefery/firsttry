@@ -1,0 +1,15 @@
+{
+    "data":[
+        {"id":"E-Niaga", "name":"E-Niaga"},
+        {"id":"Akuntansi", "name":"Akuntansi"},
+        {"id":"Administrasi Kantor", "name":"Administrasi Kantor"},
+        {"id":"Ilmu Pengetahuan Bisnis", "name":"Ilmu Pengetahuan Bisnis"},
+        {"id":"Ritel dan Distribusi", "name":"Ritel dan Distribusi"},
+        {"id":"Sumberdaya Manusia", "name":"Sumberdaya Manusia"},
+        {"id":"Transportasi", "name":"Transportasi"},
+        {"id":"Kualitas", "name":"Kualitas"},
+        {"id":"Keuangan", "name":"Keuangan"},
+        {"id":"Manajemen", "name":"Manajemen"},
+        {"id":"Pemasaran", "name":"Pemasaran"}
+    ]
+}

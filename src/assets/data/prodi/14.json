@@ -1,0 +1,14 @@
+{
+    "data":[
+        {"id":"Studi Perpustakaan", "name":"Studi Perpustakaan"},
+        {"id":"Sosiologi", "name":"Sosiologi"},
+        {"id":"Ilmu Politik", "name":"Ilmu Politik"},
+        {"id":"Antropologi", "name":"Antropologi"},
+        {"id":"Film & Televisi", "name":"Film & Televisi"},
+        {"id":"Ekonomi", "name":"Ekonomi"},
+        {"id":"Media", "name":"Media"},
+        {"id":"Studi Pendidikan", "name":"Studi Pendidikan"},
+        {"id":"Jurnalistik", "name":"Jurnalistik"},
+        {"id":"Ilmu Sosial Lainnya", "name":"Ilmu Sosial Lainnya"}
+    ]
+}

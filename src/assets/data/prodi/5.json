@@ -1,0 +1,19 @@
+{
+    "data":[
+        {"id":"Planologi", "name":"Planologi"},
+        {"id":"Layanan Pemeliharaan", "name":"Layanan Pemeliharaan"},
+        {"id":"Survei", "name":"Survei"},
+        {"id":"Arsitektur", "name":"Arsitektur"},
+        {"id":"Desain Interior", "name":"Desain Interior"},
+        {"id":"Desain Industri", "name":"Desain Industri"},
+        {"id":"Konstruksi", "name":"Konstruksi"},
+        {"id":"Arsitektur", "name":"Arsitektur"},
+        {"id":"Teknik Lingkungan", "name":"Teknik Lingkungan"},
+        {"id":"Desain Interior", "name":"Desain Interior"},
+        {"id":"Desain Produk Industri", "name":"Desain Produk Industri"},
+        {"id":"Perencanaan Wilayah dan Kota/Planologi", "name":"Perencanaan Wilayah dan Kota/Planologi"},
+        {"id":"Layanan Pemeliharaan", "name":"Layanan Pemeliharaan"},
+        {"id":"Survei", "name":"Survei"},
+        {"id":"Teknik Sipil", "name":"Teknik Sipil"}
+    ]
+}

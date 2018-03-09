@@ -1,0 +1,18 @@
+{
+    "data":[
+        {"id":"1", "name":"Pertanian"},
+        {"id":"2", "name":"Ilmu Pengetahuan Alam dan Matematika"},
+        {"id":"3", "name":"Ilmu Pendidikan dan Pelatihan"},
+        {"id":"4", "name":"Teknik dan Rekayasa Teknologi"},
+        {"id":"5", "name":"Arsitektur, Bangunan dan Perencanaan"},
+        {"id":"6", "name":"Ilmu Kedokteran dan Kesehatan"},
+        {"id":"7", "name":"Komputer"},
+        {"id":"8", "name":"Bisnis dan Administrasi"},
+        {"id":"9", "name":"Humaniora"},
+        {"id":"10", "name":"Perawatan Rambut, Kecantikan dan Pribadi"},
+        {"id":"11", "name":"Pariwisata, Perhotelan, dan Jasa Boga"},
+        {"id":"12", "name":"Hukum"},
+        {"id":"13", "name":"Seni dan Desain"},
+        {"id":"14", "name":"Ilmu Sosial dan Komunikasi"}
+    ]
+}

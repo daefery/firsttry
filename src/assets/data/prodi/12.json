@@ -1,0 +1,9 @@
+{
+    "data":[
+        {"id":"Hukum Publik", "name":"Hukum Publik"},
+        {"id":"Hukum Perdata", "name":"Hukum Perdata"},
+        {"id":"Hukum Internasional", "name":"Hukum Internasional"},
+        {"id":"Ilmu Hukum", "name":"Ilmu Hukum"},
+        {"id":"Hukum Pidana", "name":"Hukum Pidana"}
+    ]
+}
