@@ -20,5 +20,14 @@ import { Component } from '@angular/core';
  
 export class ExaminationComponent { 
   constructor() { 
+		localStorage.removeItem('cognitive');
+		localStorage.removeItem('cognitive-demo');
+		localStorage.removeItem('personality');
+		localStorage.removeItem('personality-demo');
+		localStorage.removeItem('interest');
+		localStorage.removeItem('interest-demo');
+		localStorage.removeItem('demography');
+		localStorage.removeItem('demography-demo');
+		localStorage.setItem("start", "true");
   }
 }

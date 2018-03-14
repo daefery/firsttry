@@ -2,7 +2,8 @@ import { ModuleWithProviders }  from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { examinationRoutes } from './examination/examination.routes'
-import { NotFoundComponent } from './not-found.component'
+import { NotFoundComponent } from './error-page/404.component'
+import { ForbiddenComponent } from './error-page/403.component'
 
 // Route Configuration
 export const routes: Routes = [
@@ -12,6 +13,7 @@ export const routes: Routes = [
  // { path: 'assessments/:id',component: AssessmentsComponent },
  // { path: 'login',component: LoginComponent },
   ...examinationRoutes,
+  { path: 'forbidden',component: ForbiddenComponent },
   { path: '**',component: NotFoundComponent }
   
 ];

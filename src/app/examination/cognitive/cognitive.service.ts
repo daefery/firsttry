@@ -21,7 +21,7 @@ export class CognitiveService {
                     "name": "Numeric 1",
                     "hasGenericAnswer": false,
                     "description": "Ocean Description",
-                    "timeDuration": 10,
+                    "timeDuration": 1,
                     "answer": [],
                     "questions": [
                         {
@@ -87,7 +87,7 @@ export class CognitiveService {
                     "name": "Logika Dasar",
                     "hasGenericAnswer": false,
                     "description": "Ocean Description",
-                    "timeDuration": 5,
+                    "timeDuration": 1,
                     "answer": [],
                     "questions": [
                         {
@@ -148,7 +148,72 @@ export class CognitiveService {
                         }
                     ]
                 },
-                
+                {
+                    "sectionId": "sfdfsdfsd-10d5-sdfsdf4a7a-9ad7-cea81bc4b3d8",
+                    "name": "Gambaran Umum",
+                    "hasGenericAnswer": false,
+                    "description": "Ocean Description",
+                    "timeDuration": 1,
+                    "answer": [],
+                    "questions": [
+                        {
+                            "questionId": "sdfsdf-0627-4a26-a07b-1ac6dcc3dda3",
+                            "name": "Siapa Nama Kamu.",
+                            "type":"image",
+                            "grade": 1,
+                            "answers": [
+                                {
+                                    "answerId": "sdfsdf-sdfsdfsdf-4a3d-dfgdfgsd-9d26265a3067",
+                                    "name": "assets/images/assessments/global.jpg"
+                                },
+                                {
+                                    "answerId": "dfdfd-dgdgfg-c089-5db8-fgfgsfgsf",
+                                    "name": "assets/images/assessments/global.jpg"
+                                },
+                                {
+                                    "answerId": "08d584ad-sdf-sdsd4a3d-c88d-dsgsdgsdg",
+                                    "name": "assets/images/assessments/global.jpg"
+                                },
+                                {
+                                    "answerId": "08d584ad-f004-sdfsdf-5db8-sdfdf",
+                                    "name": "assets/images/assessments/global.jpg"
+                                },
+                                {
+                                    "answerId": "dfdf-sdfd-c089-5db8wer3-3bceb5f",
+                                    "name": "assets/images/assessments/global.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "questionId": "dfdf-f702-416e-dfdf-dfdfd",
+                            "name": "Dimana Rumahmu.",
+                            "type":"text",
+                            "grade": 2,
+                            "answers": [
+                                {
+                                    "answerId": "dfd-dfdfdf-fgfhfh-c88d-dfdfd",
+                                    "name": "Answer 11"
+                                },
+                                {
+                                    "answerId": "dfhyy-yusdfs-c089-5db8-dfdfd",
+                                    "name": "Answer 12"
+                                },
+                                {
+                                    "answerId": "asdasf-f004-sasda-dfdfdf-9d2dfdga3067",
+                                    "name": "Answer 13"
+                                },
+                                {
+                                    "answerId": "sd-sscasad-c089-aasfdddg-5a66dsdweb5f",
+                                    "name": "Answer 14"
+                                },
+                                {
+                                    "answerId": "dfdf-dgrrfr-c089-dfdfd-3bceb5f",
+                                    "name": "Answer 15"
+                                }
+                            ]
+                        }
+                    ]
+                }
             ]
         }
     }

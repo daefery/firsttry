@@ -14,12 +14,16 @@ import { InterestComponent } from './interest/interest.component';
 import { InterestIntroComponent } from './interest/interest-intro.component'
 import { CognitiveComponent } from './cognitive/cognitive.component';
 import { CognitiveIntroComponent } from './cognitive/cognitive-intro.component';
+import { PersonalityComponent } from './personality/personality.component';
+import { PersonalityIntroComponent } from './personality/personality-intro.component';
+import { ThankYouComponent } from './thank-you.component';
 
 import { DemographyService } from './demography/demography.service'
 import { FormDataService } from './demography/form-data.service'
 import { DemographyFormService } from './demography/demography-form.service'
 import { InterestService } from './interest/interest.service';
 import { CognitiveService } from './cognitive/cognitive.service';
+import { PersonalityService } from './personality/personality.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,10 @@ import { CognitiveService } from './cognitive/cognitive.service';
     InterestComponent,
     InterestIntroComponent,
     CognitiveComponent,
-    CognitiveIntroComponent
+    CognitiveIntroComponent,
+    PersonalityComponent,
+    PersonalityIntroComponent,
+    ThankYouComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +53,8 @@ import { CognitiveService } from './cognitive/cognitive.service';
     FormDataService, 
     DemographyFormService,
     InterestService,
-    CognitiveService
+    CognitiveService,
+    PersonalityService
   ],
   bootstrap: []
 })

@@ -2,20 +2,20 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  template: `
-  <div class="container">
-    <div class="col s12">
-    <h2 class="header">Demografi</h2>
+    template:`
+    <div class="container">
+    <div class="col s12 m7">
+    <h2 class="header">Personality</h2>
     <div class="card horizontal">
     <div class="card-image">
-    <img src="assets/images/exam/demography.jpg">
+    <img src="assets/images/exam/personality.jpg">
     </div>
     <div class="card-stacked">
     <div class="card-content">
         <p>I am a very simple card. I am good at containing small bits of information.</p>
     </div>
     <div class="card-action">
-        <a routerLink="start">Mualai</a>
+        <a routerLink="1">Mualai</a>
     </div>
     </div>
     </div>
@@ -24,13 +24,13 @@ import { Router } from '@angular/router';
   `
 })
  
-export class DemographyIntroComponent { 
+export class PersonalityIntroComponent { 
   constructor(private router:Router) { 
-    let p = localStorage.getItem('start');
+    let p = localStorage.getItem('cognitive');
     if(p == null){
-			this.router.navigateByUrl('/forbidden');
+            this.router.navigateByUrl('/forbidden');
     }else{
-      localStorage.setItem('demography-intro', "true");
+        localStorage.setItem('personality-demo', "true");
     }
   }
 }

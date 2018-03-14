@@ -6,7 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
-export class InterestService {
+export class PersonalityService {
 	constructor(private http: HttpClient) { }
 
     // getSection(): Observable<any> {

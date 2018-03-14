@@ -37,7 +37,11 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
 	loading=true;
 
     constructor(private fb: FormBuilder, private demographyFormService:DemographyFormService, private formDataService: FormDataService, private router: Router) {
-    	this.listForm = [];
+		let p = localStorage.getItem('demography-intro');
+		if(p == null){
+				this.router.navigateByUrl('/forbidden');
+		}
+		this.listForm = [];
 		this.form = new FormGroup({city:new FormControl('')});
 		this.formDataService.getUniversity().subscribe(resUnv=>{
 			this.formDataService.getProvince().subscribe(resProv=>{
@@ -160,10 +164,10 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
 		// this.formDataService.getTest().subscribe(res=>{
 		// 	console.log(res);
 		// });
+		
     }
 
     onSubmit(){
-		console.log(this.form.value);
     	Materialize.Toast.removeAll();
     	let valid = [];
     	this.submitted = true;
@@ -202,6 +206,7 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
     		$('#'+valid[0].id).focus();
     	}else{
 			Materialize.toast('Berhasil.', 4000);
+			localStorage.setItem('demography', "true");
 			this.router.navigateByUrl('/exam/interest');
     	}
     }

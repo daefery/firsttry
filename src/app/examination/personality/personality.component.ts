@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { InterestService } from './interest.service';
+import { PersonalityService } from './personality.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {NgForm} from '@angular/forms';
 declare var $,Materialize:any;
 @Component({
-    templateUrl:'./interest.component.html',
+    templateUrl:'./personality.component.html',
     styles:[`
     .progress{
         height: 60px;
@@ -20,7 +20,7 @@ declare var $,Materialize:any;
     `]
 })
  
-export class InterestComponent implements OnInit, OnDestroy { 
+export class PersonalityComponent implements OnInit, OnDestroy { 
     
     dataSection;
     dataQuestion;
@@ -33,7 +33,7 @@ export class InterestComponent implements OnInit, OnDestroy {
     totalQuestion;
     currentTotalQuestion;
     isValidForm = false;
-    constructor(private interestService : InterestService, private activeRoute: ActivatedRoute, private router:Router) { 
+    constructor(private personalityService : PersonalityService, private activeRoute: ActivatedRoute, private router:Router) { 
     }  
     ngOnInit() {
         // for(let i=0;i<10;i++){
@@ -42,7 +42,7 @@ export class InterestComponent implements OnInit, OnDestroy {
         // this.interestService.getSection().subscribe(res=>{
         //     console.log(res);
         // });
-        let p = localStorage.getItem('interest-demo');
+        let p = localStorage.getItem('personality-demo');
         if(p == null){
                 this.router.navigateByUrl('/forbidden');
         }
@@ -51,7 +51,7 @@ export class InterestComponent implements OnInit, OnDestroy {
             if(!isNaN(this.currentId)){
                 this.isValidForm = false;
                 this.pageNumber = +params['id'];
-                this.dataSection = this.interestService.getSection().sections[0];
+                this.dataSection = this.personalityService.getSection().sections[0];
                 this.totalQuestion = this.dataSection.questions.length;
                 let c = this.dataSection.questions.length/5;
                 if(!Number.isInteger(c)){
@@ -87,7 +87,7 @@ export class InterestComponent implements OnInit, OnDestroy {
         $('#btn-submit').trigger('click');
         if(this.isValidForm){
             this.pageNumber++;
-            this.router.navigateByUrl('/exam/interest/'+this.pageNumber);        
+            this.router.navigateByUrl('/exam/personality/'+this.pageNumber);        
         }else{
             Materialize.toast('Masih ada form invalid!', 4000);
         }
@@ -98,8 +98,8 @@ export class InterestComponent implements OnInit, OnDestroy {
         $('#btn-submit').trigger('click');
         if(this.isValidForm){
             Materialize.toast('Berhasil!', 4000);
-            localStorage.setItem('interest', "true");
-            this.router.navigateByUrl('/exam/cognitive');        
+            localStorage.setItem('personality', "true");
+            this.router.navigateByUrl('/thankyou');        
         }else{
             Materialize.toast('Masih ada form invalid!', 4000);
         }

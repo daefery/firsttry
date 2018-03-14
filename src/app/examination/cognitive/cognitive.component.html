@@ -7,14 +7,14 @@
                     <div class="col s6">
                         <h4>{{sectionName}}</h4>
                     </div>
-                    <div class="col s6">
-                        <h4 class="countdown red-text" style="float: right">00:00:00</h4>
+                    <div class="col s6" *ngIf="!isIntroShow" id="countdown">
+                        <!-- <h4 class="countdown red-text" style="float: right">00:00:00</h4> -->
                     </div>
                 </div>
-                <div class="progress">
+                <div class="progress" *ngIf="!isIntroShow">
                     <div class="determinate" id="formProgress" style="width: 0%"></div>
                     <div class="progress-text">
-                        <h4 class="center-align">{{sectionCount}}/{{processDone}}</h4>
+                        <h4 class="center-align">{{sectionProgress}}/{{processDone}}</h4>
                     </div>
                 </div>
                 <div class="row">
@@ -38,33 +38,38 @@
                                 </div>
                             </div>
                         </div> -->
-                        <div class="row">
-                                <div *ngFor="let propQs of currentDataSection.questions;let iQs=index" id="question_{{iQs + 1}}" [hidden]="iQs != 0">
-                                    <p class="flow-text col s12">{{propQs.name}}</p>
-                                    <div *ngFor="let propAnswer of propQs.answers">
-                                        <div class="col s12 m6 l3" *ngIf="propQs.type=='image'">
-                                            <input class="with-gap" name="{{propQs.questionId}}" type="radio" id="{{propAnswer.answerId}}"  />
-                                            <label for="{{propAnswer.answerId}}">
-                                                <img class="responsive-img" src="{{propAnswer.name}}">
-                                            </label>
-                                        </div>
-                                        <p *ngIf="propQs.type=='text'" class="col s12">
-                                            <input class="with-gap" name="{{propQs.questionId}}" type="radio" id="{{propAnswer.answerId}}"  />
-                                            <label for="{{propAnswer.answerId}}">
-                                                {{propAnswer.name}}
-                                            </label>
-                                        </p>
+                        <div class="row" *ngIf="!isIntroShow">
+                            <div *ngFor="let propQs of currentDataSection.questions;let iQs=index" id="question_{{iQs + 1}}" [hidden]="iQs != 0">
+                                <p class="flow-text col s12">{{propQs.name}}</p>
+                                <div *ngFor="let propAnswer of propQs.answers">
+                                    <div class="col s12 m6 l3" *ngIf="propQs.type=='image'">
+                                        <input class="with-gap" name="{{propQs.questionId}}" type="radio" id="{{propAnswer.answerId}}"  />
+                                        <label for="{{propAnswer.answerId}}">
+                                            <img class="responsive-img" src="{{propAnswer.name}}">
+                                        </label>
                                     </div>
+                                    <p *ngIf="propQs.type=='text'" class="col s12">
+                                        <input class="with-gap" name="{{propQs.questionId}}" type="radio" id="{{propAnswer.answerId}}"  />
+                                        <label for="{{propAnswer.answerId}}">
+                                            {{propAnswer.name}}
+                                        </label>
+                                    </p>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row" *ngIf="isIntroShow">
+                            <p class="flow-text col s12" [innerHTML]="IntroSection">
+                            </p>
+                        </div>
+                            
                     </div>
-                    
                 </div>
             </div>
             <div class="card-action">
-              <a *ngIf="sectionCount > 1" class="waves-effect waves-light btn" (click)="Back()"><i class="material-icons left">arrow_back</i>Sebelumnya</a>
-              <a *ngIf="sectionCount != processDone" class="waves-effect waves-light btn" (click)="Next()"><i class="material-icons right">arrow_forward</i>Selanjutnya</a>
-              <a *ngIf="sectionCount == processDone" class="waves-effect waves-light btn" (click)="Done()"><i class="material-icons right">arrow_forward</i>Selesai</a>
+              <a *ngIf="sectionProgress > 1" class="waves-effect waves-light btn" (click)="Back()"><i class="material-icons left">arrow_back</i>Sebelumnya</a>
+              <a *ngIf="isIntroShow" class="waves-effect waves-light btn" (click)="Start()">Mulai</a>
+              <a *ngIf="sectionProgress != processDone && !isIntroShow" class="waves-effect waves-light btn" (click)="Next()"><i class="material-icons right">arrow_forward</i>Selanjutnya</a>
+              <button *ngIf="sectionProgress == processDone" id="selesai" class="waves-effect waves-light btn" (click)="Done()"><i class="material-icons right">arrow_forward</i>Selesai</button>
             </div>
         </div>
     </div>

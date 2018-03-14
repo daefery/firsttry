@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     template:`
@@ -14,7 +15,7 @@ import { Component } from '@angular/core';
         <p>I am a very simple card. I am good at containing small bits of information.</p>
     </div>
     <div class="card-action">
-        <a routerLink="start">Mualai</a>
+        <a routerLink="1">Mualai</a>
     </div>
     </div>
     </div>
@@ -24,6 +25,12 @@ import { Component } from '@angular/core';
 })
  
 export class InterestIntroComponent { 
-  constructor() { 
+  constructor(private router:Router) { 
+    let p = localStorage.getItem('demography');
+    if(p == null){
+            this.router.navigateByUrl('/forbidden');
+    }else{
+        localStorage.setItem('interest-demo', "true");
+    }
   }
 }

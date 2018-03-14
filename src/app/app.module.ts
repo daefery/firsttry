@@ -4,7 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent }         from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ExaminationModule } from './examination/examination.module';
-import { NotFoundComponent } from './not-found.component'
+import { NotFoundComponent } from './error-page/404.component'
+import { ForbiddenComponent } from './error-page/403.component'
 
 //main route
 import { routing } from './app.routes';
@@ -13,7 +14,8 @@ import { routing } from './app.routes';
 @NgModule({
   declarations: [
     AppComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule,
