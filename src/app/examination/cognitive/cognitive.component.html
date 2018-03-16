@@ -1,4 +1,4 @@
-<div class="row container">
+<div class="row">
         <div class="card white">
             <div class="card-content">
                 <span class="card-title"><h3>Cognitive</h3></span>
@@ -40,9 +40,10 @@
                         </div> -->
                         <div class="row" *ngIf="!isIntroShow">
                             <div *ngFor="let propQs of currentDataSection.questions;let iQs=index" id="question_{{iQs + 1}}" [hidden]="iQs != 0">
-                                <p class="flow-text col s12">{{propQs.name}}</p>
+                                <p *ngIf="propQs.type!='fullimage'" class="flow-text col s12">{{propQs.name}}</p>
+                                <img *ngIf="propQs.type=='fullimage'" class="responsive-img" src="{{propQs.name}}">
                                 <div *ngFor="let propAnswer of propQs.answers">
-                                    <div class="col s12 m6 l3" *ngIf="propQs.type=='image'">
+                                    <div class="col s2" *ngIf="propQs.type=='image' || propQs.type=='fullimage'">
                                         <input class="with-gap" name="{{propQs.questionId}}" type="radio" id="{{propAnswer.answerId}}"  />
                                         <label for="{{propAnswer.answerId}}">
                                             <img class="responsive-img" src="{{propAnswer.name}}">
@@ -67,9 +68,9 @@
             </div>
             <div class="card-action">
               <a *ngIf="sectionProgress > 1" class="waves-effect waves-light btn" (click)="Back()"><i class="material-icons left">arrow_back</i>Sebelumnya</a>
-              <a *ngIf="isIntroShow" class="waves-effect waves-light btn" (click)="Start()">Mulai</a>
+              <a *ngIf="isIntroShow" class="waves-effect waves-light btn" (click)="Start()"><i class="material-icons right">forward</i>Mulai</a>
               <a *ngIf="sectionProgress != processDone && !isIntroShow" class="waves-effect waves-light btn" (click)="Next()"><i class="material-icons right">arrow_forward</i>Selanjutnya</a>
-              <button *ngIf="sectionProgress == processDone" id="selesai" class="waves-effect waves-light btn" (click)="Done()"><i class="material-icons right">arrow_forward</i>Selesai</button>
+              <button *ngIf="sectionProgress == processDone" id="selesai" class="waves-effect waves-light btn" (click)="Done()"><i class="material-icons right">send</i>Selesai</button>
             </div>
         </div>
     </div>

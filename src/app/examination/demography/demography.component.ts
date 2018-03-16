@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { DemographyFormService } from './demography-form.service';
 import { FormDataService } from './form-data.service'
 import { Router } from '@angular/router';
+import {IMyDpOptions} from 'mydatepicker';
 
 declare var $,Materialize:any;
 @Component({
@@ -35,11 +36,15 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
 	formSectionName;
 	formProgress;
 	loading=true;
-
+	nextEducation=[];
+	nextEducationMax=1;
+	myDatePickerOptions: IMyDpOptions = {
+        dateFormat: 'dd/mm/yyyy',
+    };
     constructor(private fb: FormBuilder, private demographyFormService:DemographyFormService, private formDataService: FormDataService, private router: Router) {
 		let p = localStorage.getItem('demography-intro');
 		if(p == null){
-				this.router.navigateByUrl('/forbidden');
+			this.router.navigateByUrl('/forbidden');
 		}
 		this.listForm = [];
 		this.form = new FormGroup({city:new FormControl('')});
@@ -70,8 +75,6 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
     }
 
     onChange(data, event){
-		console.log(data);
-		console.log(event);
     	if(data != undefined){
 			if(data == "old_district" || data == "new_district"){
 				this.formDataService.getDistrict(event.name)
@@ -122,6 +125,9 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
 			}
 		});
 		$('#formProgress').attr('style','width:'+100/6+'%');
+		setTimeout(() => {
+			$('.selectiongroup input').removeAttr('style');
+		}, 100);
 	}
 
 	toFormGroup(data) {
@@ -141,11 +147,13 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
 							let phoneRegex = /^(^\+62\s?|^0)(\d{3,4}-?){2}\d{3,4}$/;
 							group[propChild.name] = new FormControl('', [Validators.required, Validators.pattern(phoneRegex)]);
 						}else if(propChild.name == 'h_phone'){
-							let rumah = /0[2-9]{1}[1-9]{1}(|[0-9]{1})[0-9]{6,7}$/;
-							group[propChild.name] = new FormControl('', [Validators.required, Validators.pattern(rumah)]);
+							let rumah = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+							group[propChild.name] = new FormControl('', Validators.pattern(rumah));
 						}else if(propChild.type == 'email'){
 							let emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 							group[propChild.name] = new FormControl('', [Validators.required, Validators.pattern(emailRegex)]);
+						}else if(propChild.type=='collection'){
+							group[propChild.name] = new FormControl('');
 						}else{
 							group[propChild.name] = new FormControl('', Validators.required);
 						}
@@ -155,6 +163,18 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
 		});
 		this.form = new FormGroup(group);
 	}
+
+	toggleAgeDisable(event) {
+		if(event){
+			this.form.controls.new_address.disable();
+			this.form.controls.new_province.disable();
+			this.form.controls.new_district.disable();
+		}else{
+			this.form.controls.new_address.enable();
+			this.form.controls.new_province.enable();
+			this.form.controls.new_district.enable();
+		}
+    }
 
 	ngOnChanges() {
 		this.form.reset();
@@ -202,7 +222,6 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
 
     	if(valid.length > 0){
 			Materialize.toast('Harap melengkapi form terlebih dahulu.', 4000);
-			console.log(valid[0].id);
     		$('#'+valid[0].id).focus();
     	}else{
 			Materialize.toast('Berhasil.', 4000);
@@ -259,6 +278,8 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
 				this.sectionCount = jk + 1;
 			}
 		}
+
+		$('.tooltipped').tooltip({delay: 50});
 	}
 
 	Back(){
@@ -276,5 +297,51 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
 			$('#section_'+jkTarget).fadeIn('slow');
 		});
 		this.sectionCount = jk - 1;
+	}
+
+	addNextEducation(data){
+		let check = true;
+		if(this.form.controls.next_education.status == 'INVALID'){
+			check = false;
+		}
+		if(this.form.controls.next_school.status == 'INVALID'){
+			check = false;
+		}
+		if(this.form.controls.next_faculty.status == 'INVALID'){
+			check = false;
+		}
+		if(this.form.controls.next_prody.status == 'INVALID'){
+			check = false;
+		}
+		if(check){
+			let faculty;
+			data.forEach(res => {
+				if(res.id==this.form.controls.next_faculty.value){
+					faculty = res.name;
+				}
+			});
+			let ps = {
+				id:'next_'+this.nextEducationMax,
+				next_education:this.form.controls.next_education.value==''?this.form.controls.input_next_education.value:this.form.controls.next_education.value,
+				next_school:this.form.controls.next_school.value==''?this.form.controls.input_next_school.value:this.form.controls.next_school.value,
+				next_faculty:this.form.controls.next_faculty.value==''?this.form.controls.input_next_faculty.value:faculty,
+				next_prody:this.form.controls.next_prody.value==''?this.form.controls.input_next_prody.value:this.form.controls.next_prody.value,
+			}
+			this.nextEducation.push(ps);
+			this.nextEducationMax++;
+			$(document).ready(function(){
+				$('.collapsible').collapsible();
+			});
+		}else{
+			Materialize.toast('Harap lengkapi rencana pendidikan.', 4000);
+		}
+		
+	}
+
+	removeNextEdu(id){
+		this.nextEducation.splice(id, 1);
+		$(document).ready(function(){
+			$('.collapsible').collapsible();
+		});
 	}
 }

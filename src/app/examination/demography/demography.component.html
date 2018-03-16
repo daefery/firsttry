@@ -1,7 +1,7 @@
-<div class="row container">
+<div class="row">
     <div class="card white">
 		<div class="card-content">
-	  		<span class="card-title"><h3>Demography</h3></span>
+	  		<span class="card-title"><h3>Data Diri</h3></span>
 			<hr class="hr-form"><br>
 			<div class="progress">
 				<div class="determinate" id="formProgress" style="width: 0%"></div>
@@ -11,13 +11,28 @@
 			</div>
 			<div class="row">
 				<form class="col s12" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
-
 					<div *ngFor="let mainProp of dataForm;let main_index = index" id="section_{{main_index+1}}" [hidden]="main_index != 0">
 						<br>
+
 				      	<!-- <h5><i class="material-icons">arrow_forward</i> {{mainProp.section_name}}</h5> -->
 						<!-- <hr class="hr-form"> -->
 						<div class="row" *ngFor="let prop of mainProp.data">
 							<div *ngFor="let propChild of prop.values" class="col s{{12/prop.values.length}} m{{12/prop.values.length}}">
+								
+								<ul *ngIf="propChild.type=='collection' && nextEducation.length > 0" id="{{propChild.name}}" class="collapsible" data-collapsible="accordion">
+									<li *ngFor="let ned of nextEducation;let ine=index">
+										<div class="collapsible-header">
+										<h6 class="col s11">Rencana Pendidikan {{ine+1}}</h6>
+										<a (click)="removeNextEdu(ine)" style="text-align: right;" class="col s1 red-text"><i class="material-icons">close</i></a>
+										</div>
+										<div class="collapsible-body">
+											<p>Pendidikan : {{ned.next_education}}</p>
+											<p>Fakultas : {{ned.next_faculty}}</p>
+											<p>Prodi : {{ned.next_prody}}</p>
+											<p>Perguruan Tinggi : {{ned.next_school}}</p>
+										</div>
+									</li>
+								</ul>
 
 								<div *ngIf="propChild.child == undefined">
 									<label *ngIf="propChild.type !='checkbox'" for="{{propChild.name}}" [ngClass]="{'red-text text-darken-2':form.controls[propChild.name].invalid && (form.controls[propChild.name].dirty || submitted)}">{{propChild.label}}</label>
@@ -31,13 +46,25 @@
 									</div>
 								</div>
 					          
-					          <input *ngIf="propChild.type != 'select' && propChild.type != 'textarea'" 
+							  <input *ngIf="propChild.type != 'select' && propChild.type != 'textarea' && propChild.type != 'date' && propChild.type != 'checkbox'
+							  	&& propChild.type!='collection'" 
 					          	placeholder="{{propChild.placeholder}}" 
 					          	id="{{propChild.name}}" 
 					          	type="{{propChild.type}}" 
 					          	[ngClass]="{'invalid':form.controls[propChild.name].invalid && (form.controls[propChild.name].dirty || submitted)}"
-					          	class="{{propChild.class}}"
-					          	formControlName="{{propChild.name}}">
+								class="{{propChild.class}}"
+								autocomplete="{{propChild.name}}"  
+								formControlName="{{propChild.name}}">
+
+								<input *ngIf="propChild.name == 'is_same_address'" type="checkbox" id="{{propChild.name}}" class="filled-in" formControlName="{{propChild.name}}" (change)="toggleAgeDisable($event.target.checked)"/>
+								<label *ngIf="propChild.name == 'is_same_address'" for="{{propChild.name}}">{{propChild.label}}</label>  
+
+								<my-date-picker [ngClass]="{'invalid':form.controls[propChild.name].invalid && (form.controls[propChild.name].dirty || submitted)}" 
+								*ngIf="propChild.type == 'date'" 
+								[options]="myDatePickerOptions" 
+								id="{{propChild.name}}"
+								formControlName="{{propChild.name}}"
+								[placeholder]="propChild.placeholder"></my-date-picker>
 					          	
 					          	<div *ngIf="propChild.type == 'select'">
 									<ng-select *ngIf="propChild.child == undefined && propChild.options.length > 0" 
@@ -118,6 +145,7 @@
 								</div>
 
 								<textarea [placeholder]="propChild.placeholder" 
+								autocomplete="street-address"
 								*ngIf="propChild.type == 'textarea'" 
 								[id]="propChild.name" [formControlName]="propChild.name" 
 								class="{{propChild.class}}"
@@ -166,11 +194,14 @@
 										</div>
 									</div>
 								</div>
-								
-					        </div>
+							</div>
 						</div>
+						<a *ngIf="mainProp.section_name=='Rencana Pendidikan'" 
+						class="btn-floating btn-large waves-effect waves-light tooltipped" 
+						data-position="right" data-delay="50" 
+						data-tooltip="Tambah rencana pendidikan"
+						(click)="addNextEducation(mainProp.data[2].values[0].options)"><i class="material-icons">add</i></a>
 					</div>
-
 		        	<button type="submit" style="display: none" id="demo_btn"></button>
 			    </form>
 			</div>
@@ -178,7 +209,7 @@
 		<div class="card-action">
 		  <a *ngIf="sectionCount > 1" class="waves-effect waves-light btn" (click)="Back()"><i class="material-icons left">arrow_back</i>Sebelumnya</a>
 		  <a *ngIf="sectionCount != 6" class="waves-effect waves-light btn" (click)="Next()"><i class="material-icons right">arrow_forward</i>Selanjutnya</a>
-		  <a *ngIf="sectionCount == 6" class="waves-effect waves-light btn" (click)="Next()"><i class="material-icons right">arrow_forward</i>Selesai</a>
+		  <a *ngIf="sectionCount == 6" class="waves-effect waves-light btn" (click)="Next()"><i class="material-icons right">send</i>Selesai</a>
 		</div>
 	</div>
 </div>

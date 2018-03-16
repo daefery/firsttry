@@ -49,11 +49,11 @@ export class DemographyFormService {
 						},
 						{
 							type:"select",
-							name:"blood_type",
-							label:"Golongan Darah",
+							name:"suku_bangsa",
+							label:"Suku Bangsa",
 							class:"",
-							options:this.formDataService.getBloodType(),
-							placeholder:"Pilih Golongan Darah"
+							options:this.formDataService.getSukuBangsa(),
+							placeholder:"Pilih Suku Bangsa"
 						}
 					]
 				},
@@ -72,7 +72,7 @@ export class DemographyFormService {
 							name:"birthdate",
 							label:"Tanggal Lahir",
 							class:"",
-							placeholder:"Masukkan Tanggal Lahir"
+							placeholder:"dd/mm/yyyy"
 						}
 					]
 				},
@@ -92,7 +92,7 @@ export class DemographyFormService {
 			    			name:"email",
 			    			label:"Alamat Email",
 			    			class:"",
-			    			placeholder:"Masukkan Alamat Email"
+			    			placeholder:"contoh.email@domain.com"
 			    		},
 					]
 				},
@@ -102,16 +102,16 @@ export class DemographyFormService {
 			    		{
 			    			type:"text",
 			    			name:"h_phone",
-			    			label:"Nomor Telepon Rumah",
+			    			label:"Nomor Telepon Rumah (optional)",
 			    			class:"",
-			    			placeholder:"Masukkan Nomor Telepon Rumah"
+			    			placeholder:"021-XXXXXXX"
 			    		},
 			    		{
 			    			type:"text",
 			    			name:"m_phone",
 			    			label:"Nomor Handphone",
 			    			class:"",
-			    			placeholder:"Masukkan Nomor Handphone"
+			    			placeholder:"+628XXXXXXXXXXX / 081XXXXXXXXX"
 			    		},
 					]
 				},
@@ -165,6 +165,18 @@ export class DemographyFormService {
 		return {
 			section_name:"Domisili Sekarang",
 			data:[
+				{
+					form_type:"input",
+					values:[
+						{
+							type:"checkbox",
+							name:"is_same_address",
+							label:"Apakah domisili sekarang sama dengan domisili KTP?",
+							class:"",
+							placeholder:""
+						}
+					]
+				},
 				{
 					form_type:"input",
 					values:[
@@ -231,7 +243,7 @@ export class DemographyFormService {
 			    			options:this.formDataService.getSchool(),
 			    			placeholder:"Pilih Sekolah / Universitas",
 			    			child:{
-			    				label:"Sekolah / Universitas anda belum ada?",
+			    				label:"Sekolah / Universitas anda belum ada dalam daftar?",
 			    				placeholder:"Usulkan Sekolah / Universitas"
 			    			}
 						},
@@ -243,7 +255,7 @@ export class DemographyFormService {
 			    			options:this.formDataService.getMajors(),
 			    			placeholder:"Pilih Jurusan / Prodi",
 			    			child:{
-			    				label:"Jurusan / Prodi anda belum ada?",
+			    				label:"Jurusan / Prodi anda belum ada dalam daftar?",
 			    				placeholder:"Usulkan Jurusan / Prodi"
 			    			}
 			    		},
@@ -257,6 +269,18 @@ export class DemographyFormService {
 		return {
 			section_name:"Rencana Pendidikan",
 			data:[
+				{
+					form_type:"input",
+					values:[
+						{
+							type:"collection",
+							name:"next_feature_col",
+							label:"",
+							class:"",
+							placeholder:""
+						},
+					]
+				},
 				{
 					form_type:"input",
 					values:[
@@ -276,7 +300,7 @@ export class DemographyFormService {
 							options:data.university,
 							placeholder:"Pilih Sekolah / Universitas",
 							child:{
-								label:"Sekolah / Universitas anda belum ada?",
+								label:"Sekolah / Universitas anda belum ada dalam daftar?",
 								placeholder:"Usulkan Sekolah / Universitas"
 							}
 						},
@@ -293,7 +317,7 @@ export class DemographyFormService {
 							options:data.faculty,
 							placeholder:"Pilih Fakultas",
 							child:{
-								label:"Fakultas anda belum ada?",
+								label:"Fakultas anda belum ada dalam daftar?",
 								placeholder:"Usulkan Fakultas"
 							},
 							onchange:"next_prody"							
@@ -306,7 +330,7 @@ export class DemographyFormService {
 							options:[],
 							placeholder:"Pilih Jurusan / Prodi",
 							child:{
-								label:"Jurusan / Prodi anda belum ada?",
+								label:"Jurusan / Prodi anda belum ada dalam daftar?",
 								placeholder:"Usulkan Jurusan / Prodi"
 							}
 						},

@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Select2Module } from 'ng2-select2';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { MyDatePickerModule } from 'mydatepicker';
 
 import { ExaminationComponent } from './examination.component';
 import { DemographyComponent } from './demography/demography.component';
@@ -46,7 +47,8 @@ import { PersonalityService } from './personality/personality.service';
     ReactiveFormsModule,
     RouterModule,
     Select2Module,
-    NgSelectModule
+    NgSelectModule,
+    MyDatePickerModule
   ],
   providers: [
     DemographyService, 

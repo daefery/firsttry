@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 @Component({
     template:`
-    <div class="container">
+    <div class="row">
     <div class="col s12">
     <h2 class="header">Cognitive</h2>
     <div class="card horizontal">
@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
         <p>I am a very simple card. I am good at containing small bits of information.</p>
     </div>
     <div class="card-action">
-        <a routerLink="1">Mualai</a>
+        <a class="waves-effect waves-light btn" routerLink="1"><i class="material-icons right">forward</i>Mulai</a>
     </div>
     </div>
     </div>

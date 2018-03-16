@@ -12,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 <body>
   <div class="page-wrap">
     <h1>404</h1>
-    <h2>not found</h2>
+    <h2>Halaman Tidak Ditemukan</h2>
     <p><a href="/">home</a></p>
   </div>
 </body>

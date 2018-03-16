@@ -89,7 +89,7 @@ export class InterestComponent implements OnInit, OnDestroy {
             this.pageNumber++;
             this.router.navigateByUrl('/exam/interest/'+this.pageNumber);        
         }else{
-            Materialize.toast('Masih ada form invalid!', 4000);
+            Materialize.toast('Harap melengkapi jawaban anda!', 4000);
         }
 
     }
@@ -101,7 +101,7 @@ export class InterestComponent implements OnInit, OnDestroy {
             localStorage.setItem('interest', "true");
             this.router.navigateByUrl('/exam/cognitive');        
         }else{
-            Materialize.toast('Masih ada form invalid!', 4000);
+            Materialize.toast('Harap melengkapi jawaban anda!', 4000);
         }
     }
     // Back(){

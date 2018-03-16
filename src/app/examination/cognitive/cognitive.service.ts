@@ -53,6 +53,62 @@ export class CognitiveService {
                             ]
                         },
                         {
+                            "questionId": "adsfsdf-0627-4a26-a07bsdfsdf-1ac6dcc3dda3",
+                            "name": "assets/images/exam/contoh-soal.jpg",
+                            "type":"fullimage",
+                            "grade": 1,
+                            "answers": [
+                                {
+                                    "answerId": "sdfsdfsdf-f00sdfsdfsdfsdf4-4a3d-c88sdfsdfsdfsd-9d26265a3067",
+                                    "name": "assets/images/exam/ans-1.jpg"
+                                },
+                                {
+                                    "answerId": "08d5sfdfsdf84ad-f004-c089-5db8-5sdfsdfsdfsdfa6633bceb5f",
+                                    "name": "assets/images/exam/ans-2.jpg"
+                                },
+                                {
+                                    "answerId": "08d584ad-fsdfsdfsd004-4a3d-c88d-9d2dfdga3067",
+                                    "name": "assets/images/exam/ans-3.jpg"
+                                },
+                                {
+                                    "answerId": "08d58fsdfsdfsd4ad-f004-c089-5fsdfsdfsdfdb8-5a66dsdweb5f",
+                                    "name": "assets/images/exam/ans-4.jpg"
+                                },
+                                {
+                                    "answerId": "08d584adsdfsdfsd-f004-cfsdfsd089-5db8wer3-3bceb5f",
+                                    "name": "assets/images/exam/ans-5.jpg"
+                                }
+                            ]
+                        },
+                        {
+                            "questionId": "sdfsdfsdf-0627-4a26-sdsdgsdgsdgsd-1ac6dcc3dda3",
+                            "name": "assets/images/exam/contoh-soal-2.jpg",
+                            "type":"fullimage",
+                            "grade": 1,
+                            "answers": [
+                                {
+                                    "answerId": "sdfsdfsdf-fsdfsdfsd-4a3d-c88sdfsdfsdfsd-sdfsdfsdfs",
+                                    "name": "assets/images/exam/ans2-1.jpg"
+                                },
+                                {
+                                    "answerId": "dfsdfsdfsdf-f004-c089-5db8-5sdfsdfsdfsdfa6633bceb5f",
+                                    "name": "assets/images/exam/ans2-2.jpg"
+                                },
+                                {
+                                    "answerId": "sdfsdfsdfsdfs-fsdfsdfsd004-4a3d-c88d-9d2dfdga3067",
+                                    "name": "assets/images/exam/ans2-3.jpg"
+                                },
+                                {
+                                    "answerId": "sdfsdfsdfsdfsd-f004-c089-5fsdfsdfsdfdb8-5a66dsdweb5f",
+                                    "name": "assets/images/exam/ans2-4.jpg"
+                                },
+                                {
+                                    "answerId": "sdfsdfsdfsdf-f004-cfsdfsd089-5db8wer3-3bceb5f",
+                                    "name": "assets/images/exam/ans2-5.jpg"
+                                }
+                            ]
+                        },
+                        {
                             "questionId": "f0427559-f702-416e-9023-7d67ec71a626",
                             "name": "Dimana Rumahmu.",
                             "type":"text",

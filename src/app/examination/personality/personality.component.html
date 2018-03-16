@@ -1,4 +1,4 @@
-<div class="row container">
+<div class="row">
     <div class="card white">
 		<div class="card-content">
 	  		<span class="card-title"><h3>Personality</h3></span>
@@ -12,16 +12,23 @@
 			<div class="row">
 				<div class="col s12">
 					<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
-						<div class="row" *ngFor="let propQs of dataQuestion; let i=index" id="{{propQs.questionId}}">
+						<div class="row" *ngFor="let propQs of dataQuestion; let i=index" >
 							<p class="col s12">{{i+1+currentNumber}}. {{propQs.name}}</p>
-							<p class="col s1" *ngFor="let propAns of propQs.answers;let p=index">
-								<input value="{{propAns.answerId}}" class="with-gap" name="{{propQs.questionId}}" type="radio" id="answer-{{propAns.answerId}}" ngModel 
-								required />
-								<label for="answer-{{propAns.answerId}}">
-									{{propAns.name}}
-								</label>
-								
-							</p>
+							<br>
+							<br>
+							<div class="col s12" id="{{propQs.questionId}}">
+								<label class="col s1">Sangat Tidak Suka</label>
+								<p class="col s1" *ngFor="let propAns of propQs.answers;let p=index">
+										<input value="{{propAns.answerId}}" class="with-gap" name="{{propQs.questionId}}" type="radio" id="answer-{{propAns.answerId}}" ngModel 
+										required />
+										<label for="answer-{{propAns.answerId}}">
+											{{propAns.name}}
+										</label>
+										
+									</p>
+								<label class="col s1">Sangat Suka</label>
+							</div>
+							
 							<!-- <span class="new badge red col s6">Pilih jawaban terlebih dahulu.</span> -->
 						</div>
 						<button type="submit" id="btn-submit" style="display: none"></button>
@@ -33,7 +40,7 @@
 		<div class="card-action">
 		  <!-- <a *ngIf="pageNumber > 1" class="waves-effect waves-light btn" (click)="Back()"><i class="material-icons left">arrow_back</i>Sebelumnya</a> -->
 		  <a *ngIf="pageNumber != dataQuestionCount" class="waves-effect waves-light btn" (click)="Next()"><i class="material-icons right">arrow_forward</i>Selanjutnya</a>
-		  <a *ngIf="pageNumber == dataQuestionCount" class="waves-effect waves-light btn" (click)="Done()"><i class="material-icons right">arrow_forward</i>Selesai</a>
+		  <a *ngIf="pageNumber == dataQuestionCount" class="waves-effect waves-light btn" (click)="Done()"><i class="material-icons right">send</i>Selesai</a>
 		</div>
 	</div>
 </div>

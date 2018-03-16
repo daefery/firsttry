@@ -12,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 <body>
   <div class="page-wrap">
     <h1>403</h1>
-    <h2>forbidden</h2>
+    <h2>Anda Tidak Memiliki Hak Akses</h2>
     <p><a href="/">home</a></p>
   </div>
 </body>

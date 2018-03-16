@@ -25,12 +25,25 @@ export class FormDataService {
 		];
     }
 
-    getBloodType(){
+    getSukuBangsa(){
     	return [
-			{id:"A", name:"A"},
-			{id:"B", name:"B"},
-			{id:"AB", name:"AB"},
-			{id:"O", name:"O"}
+			{id:"Suku Jawa", name:"Suku Jawa"},
+			{id:"Suku Sunda", name:"Suku Sunda"},
+			{id:"Suku Batak", name:"Suku Batak"},
+			{id:"Suku Madura", name:"Suku Madura"},
+			{id:"Suku Betawi", name:"Suku Betawi"},
+			{id:"Minangkabau", name:"Minangkabau"},
+			{id:"Suku Bugis", name:"Suku Bugis"},
+			{id:"Suku Melayu", name:"Suku Melayu"},
+			{id:"Suku Arab", name:"Suku Arab"},
+			{id:"Suku Banten", name:"Suku Banten"},
+			{id:"Suku Banjar", name:"Suku Banjar"},
+			{id:"Suku Bali", name:"Suku Bali"},
+			{id:"Suku Sasak", name:"Suku Sasak"},
+			{id:"Suku Dayak", name:"Suku Dayak"},
+			{id:"Suku Tionghoa", name:"Suku Tionghoa"},
+			{id:"Suku Makassar", name:"Suku Makassar"},
+			{id:"Suku Cirebon", name:"Suku Cirebon"}
 		];
     }
 

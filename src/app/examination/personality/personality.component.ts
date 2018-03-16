@@ -89,7 +89,7 @@ export class PersonalityComponent implements OnInit, OnDestroy {
             this.pageNumber++;
             this.router.navigateByUrl('/exam/personality/'+this.pageNumber);        
         }else{
-            Materialize.toast('Masih ada form invalid!', 4000);
+            Materialize.toast('Harap melengkapi jawaban anda!', 4000);
         }
 
     }
@@ -101,7 +101,7 @@ export class PersonalityComponent implements OnInit, OnDestroy {
             localStorage.setItem('personality', "true");
             this.router.navigateByUrl('/thankyou');        
         }else{
-            Materialize.toast('Masih ada form invalid!', 4000);
+            Materialize.toast('Harap melengkapi jawaban anda!', 4000);
         }
     }
     // Back(){
