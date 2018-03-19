@@ -18,6 +18,7 @@ import { CognitiveIntroComponent } from './cognitive/cognitive-intro.component';
 import { PersonalityComponent } from './personality/personality.component';
 import { PersonalityIntroComponent } from './personality/personality-intro.component';
 import { ThankYouComponent } from './thank-you.component';
+import { LoadingComponent } from './../loading.component';
 
 import { DemographyService } from './demography/demography.service'
 import { FormDataService } from './demography/form-data.service'
@@ -38,7 +39,8 @@ import { PersonalityService } from './personality/personality.service';
     CognitiveIntroComponent,
     PersonalityComponent,
     PersonalityIntroComponent,
-    ThankYouComponent
+    ThankYouComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

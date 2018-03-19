@@ -1,30 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+declare var $:any;
 @Component({
   template: `
-  <div class="row">
-    <div class="col s12">
-    <h2 class="header">Data Diri</h2>
-    <div class="card horizontal">
-    <div class="card-image">
-    <img src="assets/images/exam/demography.jpg">
+  <div class="slider fullscreen">
+  <ul class="slides">
+    <li>
+      <img src="assets/images/exam/home/data-diri.jpg"> <!-- random image -->
+      <div class="caption center-align">
+        <div class="" style="background-color: rgba(0,0,0,0.3);padding: 15px;">
+          <h3 class="white-text">{{title}}</h3>
+          <p class="white-text flow-text">{{description}}</p>
+          <a class="btn waves-effect waves-light" routerLink="start">Mulai</a>
+        </div>
+      </div>
+    </li>
+    </ul>
     </div>
-    <div class="card-stacked">
-    <div class="card-content">
-        <p class="flow-text">Nunc iaculis, odio ut pellentesque rutrum, nulla felis ultricies erat, a pretium tellus nulla id massa. In aliquet libero eget sapien malesuada accumsan. Curabitur pretium vel.Nunc iaculis, odio ut pellentesque rutrum, nulla felis ultricies erat, a pretium tellus nulla id massa. In aliquet libero eget sapien malesuada accumsan. Curabitur pretium vel.</p>
-    </div>
-    <div class="card-action">
-        <a class="waves-effect waves-light btn" routerLink="start"><i class="material-icons right">forward</i>Mulai</a>
-    </div>
-    </div>
-    </div>
-    </div>
-  </div>
-  `
+  `,
+  styles:[`
+  `]
 })
  
-export class DemographyIntroComponent { 
+export class DemographyIntroComponent implements AfterViewInit { 
+  description='Demografi meliputi ukuran, struktur, dan distribusi penduduk, serta bagaimana jumlah penduduk berubah setiap waktu akibat kelahiran, kematian, migrasi, serta penuaan. Analisis kependudukan dapat merujuk masyarakat secara keseluruhan atau kelompok tertentu yang didasarkan kriteria seperti pendidikan, kewarganegaraan, agama, atau etnisitas tertentu.';
+  title='Data Diri';
+  ngAfterViewInit(): void {
+    $('.slider').slider({
+      indicators:false
+    });
+  }
   constructor(private router:Router) { 
     let p = localStorage.getItem('start');
     if(p == null){

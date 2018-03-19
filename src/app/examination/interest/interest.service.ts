@@ -10,7 +10,7 @@ export class InterestService {
 	constructor(private http: HttpClient) { }
 
     // getSection(): Observable<any> {
-    //     return this.http.get('http://dbfaxtorcoid-via.cloud.revoluz.io:49894/api/Sections').map(res => res as any);
+    //     return this.http.get('http://dbfaxtorcoid-via.cloud.revoluz.io:49894/api/Sections').map(res=>res as any);
     // }
 
     /*getFormData(){

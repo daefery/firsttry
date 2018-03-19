@@ -86,18 +86,18 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
 						case "new_district":
 						this.NewDistrict = result;
 						break;
-						case "next_prody":
-						this.Prodi = result;
-						break;
+						// case "next_prody":
+						// this.Prodi = result;
+						// break;
 					}
 				});
 			}else{
 				this.formDataService.getProdi(event.id)
 				.subscribe(result => {
 					switch(data){
-						case "next_prody":
-						this.Prodi = result;
-						break;
+						// case "next_prody":
+						// this.Prodi = result;
+						// break;
 					}
 				});
 			}
@@ -127,7 +127,7 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
 		$('#formProgress').attr('style','width:'+100/6+'%');
 		setTimeout(() => {
 			$('.selectiongroup input').removeAttr('style');
-		}, 100);
+		}, 500);
 	}
 
 	toFormGroup(data) {
@@ -184,7 +184,9 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
 		// this.formDataService.getTest().subscribe(res=>{
 		// 	console.log(res);
 		// });
-		
+		$(document).ready(function(){
+			
+		}); 
     }
 
     onSubmit(){
@@ -310,28 +312,32 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
 		if(this.form.controls.next_faculty.status == 'INVALID'){
 			check = false;
 		}
-		if(this.form.controls.next_prody.status == 'INVALID'){
-			check = false;
-		}
+		// if(this.form.controls.next_prody.status == 'INVALID'){
+		// 	check = false;
+		// }
 		if(check){
-			let faculty;
-			data.forEach(res => {
-				if(res.id==this.form.controls.next_faculty.value){
-					faculty = res.name;
+			if(this.nextEducation.length >= 3){
+				Materialize.toast('Rencana pendidikan maksimal 3.', 4000);
+			}else{
+				let faculty;
+				data.forEach(res => {
+					if(res.id==this.form.controls.next_faculty.value){
+						faculty = res.name;
+					}
+				});
+				let ps = {
+					id:'next_'+this.nextEducationMax,
+					next_education:this.form.controls.next_education.value==''?this.form.controls.input_next_education.value:this.form.controls.next_education.value,
+					next_school:this.form.controls.next_school.value==''?this.form.controls.input_next_school.value:this.form.controls.next_school.value,
+					next_faculty:this.form.controls.next_faculty.value==''?this.form.controls.input_next_faculty.value:faculty,
+					// next_prody:this.form.controls.next_prody.value==''?this.form.controls.input_next_prody.value:this.form.controls.next_prody.value,
 				}
-			});
-			let ps = {
-				id:'next_'+this.nextEducationMax,
-				next_education:this.form.controls.next_education.value==''?this.form.controls.input_next_education.value:this.form.controls.next_education.value,
-				next_school:this.form.controls.next_school.value==''?this.form.controls.input_next_school.value:this.form.controls.next_school.value,
-				next_faculty:this.form.controls.next_faculty.value==''?this.form.controls.input_next_faculty.value:faculty,
-				next_prody:this.form.controls.next_prody.value==''?this.form.controls.input_next_prody.value:this.form.controls.next_prody.value,
+				this.nextEducation.push(ps);
+				this.nextEducationMax++;
+				$(document).ready(function(){
+					$('.collapsible').collapsible();
+				});
 			}
-			this.nextEducation.push(ps);
-			this.nextEducationMax++;
-			$(document).ready(function(){
-				$('.collapsible').collapsible();
-			});
 		}else{
 			Materialize.toast('Harap lengkapi rencana pendidikan.', 4000);
 		}

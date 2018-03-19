@@ -28,7 +28,7 @@
 										<div class="collapsible-body">
 											<p>Pendidikan : {{ned.next_education}}</p>
 											<p>Fakultas : {{ned.next_faculty}}</p>
-											<p>Prodi : {{ned.next_prody}}</p>
+											<!-- <p>Prodi : {{ned.next_prody}}</p> -->
 											<p>Perguruan Tinggi : {{ned.next_school}}</p>
 										</div>
 									</li>
@@ -110,7 +110,7 @@
 										[ngClass]="{'invalid':form.controls[propChild.name].invalid && (form.controls[propChild.name].dirty || submitted)}"
 										class="custom">
 									</ng-select>
-									<ng-select [items]="Prodi" *ngIf="propChild.name == 'next_prody'" 
+									<!-- <ng-select [items]="Prodi" *ngIf="propChild.name == 'next_prody'" 
 										id="{{propChild.name}}"
 										bindLabel="name"
 										bindValue="id"
@@ -119,7 +119,7 @@
 										placeholder="{{propChild.placeholder}}"
 									  	[ngClass]="{'invalid':form.controls[propChild.name].invalid && (form.controls[propChild.name].dirty || submitted) && !form.controls['child_'+propChild.name].value}"
 										class="custom">
-									</ng-select>
+									</ng-select> -->
 									
 							        <!-- <select formControlName="{{propChild.name}}" *ngIf="propChild.child == undefined"
 									  	id="{{propChild.name}}" (ngModelChange)="onChange(propChild.onchange, $event)"

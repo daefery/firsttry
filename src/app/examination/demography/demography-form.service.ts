@@ -141,7 +141,7 @@ export class DemographyFormService {
 						{
 							type:"select",
 							name:"old_province",
-							label:"Propinsi",
+							label:"Provinsi",
 							class:"",
 							options:province,
 							placeholder:"Pilih Propinsi",
@@ -150,10 +150,10 @@ export class DemographyFormService {
 						{
 							type:"select",
 							name:"old_district",
-							label:"Kabupaten",
+							label:"Kabupaten/Kota",
 							class:"",
 							options:[],
-							placeholder:"Pilih Kabupaten",
+							placeholder:"Pilih Kabupaten/Kota",
 						},
 					]
 				}
@@ -195,7 +195,7 @@ export class DemographyFormService {
 						{
 							type:"select",
 							name:"new_province",
-							label:"Propinsi",
+							label:"Provinsi",
 							class:"",
 							options:province,
 							placeholder:"Pilih Propinsi",
@@ -204,10 +204,10 @@ export class DemographyFormService {
 						{
 							type:"select",
 							name:"new_district",
-							label:"Kabupaten",
+							label:"Kabupaten/Kota",
 							class:"",
 							options:[],
-							placeholder:"Pilih Kabupaten"
+							placeholder:"Pilih Kabupaten/Kota"
 						},
 					]
 				},
@@ -319,21 +319,20 @@ export class DemographyFormService {
 							child:{
 								label:"Fakultas anda belum ada dalam daftar?",
 								placeholder:"Usulkan Fakultas"
-							},
-							onchange:"next_prody"							
+							}							
 						},
-						{
-							type:"select",
-							name:"next_prody",
-							label:"Jurusan / Prodi",
-							class:"",
-							options:[],
-							placeholder:"Pilih Jurusan / Prodi",
-							child:{
-								label:"Jurusan / Prodi anda belum ada dalam daftar?",
-								placeholder:"Usulkan Jurusan / Prodi"
-							}
-						},
+						// {
+						// 	type:"select",
+						// 	name:"next_prody",
+						// 	label:"Jurusan / Prodi",
+						// 	class:"",
+						// 	options:[],
+						// 	placeholder:"Pilih Jurusan / Prodi",
+						// 	child:{
+						// 		label:"Jurusan / Prodi anda belum ada dalam daftar?",
+						// 		placeholder:"Usulkan Jurusan / Prodi"
+						// 	}
+						// },
 					]
 				}
 			]

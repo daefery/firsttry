@@ -4,11 +4,16 @@
                 <span class="card-title"><h3>Cognitive</h3></span>
                 <hr class="hr-form"><br>
                 <div class="row">
-                    <div class="col s6">
+                    <div class="col s12">
                         <h4>{{sectionName}}</h4>
                     </div>
+                   
+                    <ul class="pagination col s6" *ngIf="!isIntroShow">
+                        <li class="waves-effect" [ngClass]="{'active':sectionProgress == idx+1}" *ngFor="let k of pagination;let idx=index">
+                            <a href="javascript:void(0)" (click)="goToPage(idx+1)">{{idx+1}}</a>
+                        </li>
+                    </ul>
                     <div class="col s6" *ngIf="!isIntroShow" id="countdown">
-                        <!-- <h4 class="countdown red-text" style="float: right">00:00:00</h4> -->
                     </div>
                 </div>
                 <div class="progress" *ngIf="!isIntroShow">
@@ -62,15 +67,15 @@
                             <p class="flow-text col s12" [innerHTML]="IntroSection">
                             </p>
                         </div>
-                            
+                        
                     </div>
                 </div>
             </div>
             <div class="card-action">
-              <a *ngIf="sectionProgress > 1" class="waves-effect waves-light btn" (click)="Back()"><i class="material-icons left">arrow_back</i>Sebelumnya</a>
+              <!-- <a *ngIf="sectionProgress > 1" class="waves-effect waves-light btn" (click)="Back()"><i class="material-icons left">arrow_back</i>Sebelumnya</a> -->
               <a *ngIf="isIntroShow" class="waves-effect waves-light btn" (click)="Start()"><i class="material-icons right">forward</i>Mulai</a>
               <a *ngIf="sectionProgress != processDone && !isIntroShow" class="waves-effect waves-light btn" (click)="Next()"><i class="material-icons right">arrow_forward</i>Selanjutnya</a>
-              <button *ngIf="sectionProgress == processDone" id="selesai" class="waves-effect waves-light btn" (click)="Done()"><i class="material-icons right">send</i>Selesai</button>
+              <button [ngClass]="{'hide':sectionProgress != processDone}" id="selesai" class="waves-effect waves-light btn" (click)="Done()"><i class="material-icons right">send</i>Selesai</button>
             </div>
         </div>
     </div>

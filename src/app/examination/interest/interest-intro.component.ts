@@ -1,30 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
+declare var $:any;
 
 @Component({
     template:`
-    <div class="row">
-    <div class="col s12">
-    <h2 class="header">Minat Bakat</h2>
-    <div class="card horizontal">
-    <div class="card-image">
-    <img src="assets/images/exam/interest.jpg">
+    <div class="slider fullscreen">
+    <ul class="slides">
+        <li>
+        <img src="assets/images/assessments/Entrepreneurial.jpg"> <!-- random image -->
+        <div class="caption center-align">
+            <div class="" style="background-color: rgba(0,0,0,0.3);padding: 15px;">
+            <h3 class="white-text">{{title}}</h3>
+            <p class="white-text flow-text">{{description}}</p>
+            <a class="btn waves-effect waves-light" routerLink="1">Mulai</a>
+            </div>
+        </div>
+        </li>
+    </ul>
     </div>
-    <div class="card-stacked">
-    <div class="card-content">
-        <p>I am a very simple card. I am good at containing small bits of information.</p>
-    </div>
-    <div class="card-action">
-        <a class="waves-effect waves-light btn" routerLink="1"><i class="material-icons right">forward</i>Mulai</a>
-    </div>
-    </div>
-    </div>
-    </div>
-  </div>
   `
 })
  
-export class InterestIntroComponent { 
+export class InterestIntroComponent implements AfterViewInit { 
+    
+    description='Minat Bakat meliputi ukuran, struktur, dan distribusi penduduk, serta bagaimana jumlah penduduk berubah setiap waktu akibat kelahiran, kematian, migrasi, serta penuaan. Analisis kependudukan dapat merujuk masyarakat secara keseluruhan atau kelompok tertentu yang didasarkan kriteria seperti pendidikan, kewarganegaraan, agama, atau etnisitas tertentu.';
+    title='Minat Bakat';
   constructor(private router:Router) { 
     let p = localStorage.getItem('demography');
     if(p == null){
@@ -33,4 +33,10 @@ export class InterestIntroComponent {
         localStorage.setItem('interest-demo', "true");
     }
   }
+
+    ngAfterViewInit(): void {
+        $('.slider').slider({
+            indicators:false
+        });
+    }
 }

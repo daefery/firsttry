@@ -35,6 +35,7 @@ export class CognitiveComponent implements OnInit, AfterViewInit, OnDestroy {
     private sub: any;
     currentId:number;
     sectionToFinish = 0;
+    pagination=[];
     constructor(private _cognitiveService:CognitiveService, private activeRoute: ActivatedRoute, private router:Router) { 
         // _cognitiveService.getSection().subscribe(res=>{
         //     this.dataSection = res.sections;
@@ -45,6 +46,9 @@ export class CognitiveComponent implements OnInit, AfterViewInit, OnDestroy {
         // this.processDone = this.currentDataSection.questions.length;
         // this.sectionName = this.currentDataSection.name;
         // this.formProgress = 100/this.processDone;
+        for (let index = 0; index < 20; index++) {
+            this.pagination.push('');
+        }
     } 
     
     ngOnInit() {
@@ -81,7 +85,7 @@ export class CognitiveComponent implements OnInit, AfterViewInit, OnDestroy {
             $('#countdown').html('');
             var functionInterval = null;
             var duration = null;
-            duration = moment.duration((d*60)*1000, 'milliseconds');
+            duration = moment.duration((60*60)*1000, 'milliseconds');
             functionInterval = setInterval(processTimer,10);
             $('#countdown').append('<h4 class="countdown_'+kl+' red-text" style="float: right">00:00:00</h4>');
             function processTimer(){
@@ -115,6 +119,7 @@ export class CognitiveComponent implements OnInit, AfterViewInit, OnDestroy {
             $('#question_'+jkTarget).removeAttr('style');
             $('#question_'+jkTarget).fadeIn('slow');
         });
+        this.formProgress = progress;
         this.sectionProgress++;
     }
 
@@ -144,6 +149,24 @@ export class CognitiveComponent implements OnInit, AfterViewInit, OnDestroy {
 
     ngOnDestroy() {
         this.sub.unsubscribe();
+    }
+
+    goToPage(id){
+        let jk = this.sectionProgress;
+        let jkTarget = id;
+        let progress = id*(100/this.processDone);
+        
+        $('#formProgress').attr('style','width:'+progress+'%');
+        $('#question_'+jk).animate({
+            opacity: 0,
+            marginLeft: '200px'
+            }, 'slow', 'linear', function() {
+            $(this).hide();
+            $('#question_'+jkTarget).removeAttr('style');
+            $('#question_'+jkTarget).fadeIn('slow');
+        });
+        this.formProgress = progress;
+        this.sectionProgress = id;
     }
   
 }

@@ -6,7 +6,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ExaminationModule } from './examination/examination.module';
 import { NotFoundComponent } from './error-page/404.component'
 import { ForbiddenComponent } from './error-page/403.component'
-
 //main route
 import { routing } from './app.routes';
 
@@ -15,7 +14,7 @@ import { routing } from './app.routes';
   declarations: [
     AppComponent,
     NotFoundComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
   ],
   imports: [
     BrowserModule,

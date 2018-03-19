@@ -15,6 +15,7 @@ import { ThankYouComponent } from './thank-you.component';
 // Route Configuration
 export const examinationRoutes: Routes = [
 	{ path: '', component: ExaminationComponent},
+	{ path: 'exam', redirectTo: '/', pathMatch: 'full'},
 	// { path: 'start', component: ExaminationComponent},
 	{ path: 'exam', component: MainExaminationComponent,
 		children: [
