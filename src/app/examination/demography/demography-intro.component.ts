@@ -8,9 +8,11 @@ declare var $:any;
     <li>
       <img src="assets/images/exam/home/data-diri.jpg"> <!-- random image -->
       <div class="caption center-align">
-        <div class="" style="background-color: rgba(0,0,0,0.3);padding: 15px;">
+        <div class="" style="background-color: rgba(0,0,0,0.54);padding: 15px;">
           <h3 class="white-text">{{title}}</h3>
-          <p class="white-text flow-text">{{description}}</p>
+          <p class="white-text flow-text">Hallo, Selamat datang di Faxtor. Untuk mendapatkan gambaran mengenai diri anda, berikut akan kami sajikan form yang terdiri beberapa pertanyaan mengenai data diri.</p>
+          <p class="white-text flow-text">Untuk mendapatkan gambaran dan potensi optimal mengenai diri anda, kami akan menyajikan beberapa pertanyaan mengenai diri saudara kami memohon kesediaan anda untuk  mengisi form mengenai data diri anda.</p>
+          <p class="white-text flow-text">Isilah setiap informasi yang ditanyakan sesuai dengan maksudnya secara lengkap dan sesuai dengan keadaan anda yang sebenarnya.</p>
           <a class="btn waves-effect waves-light" routerLink="start">Mulai</a>
         </div>
       </div>

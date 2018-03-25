@@ -2,6 +2,7 @@ import { Component, OnInit , OnChanges, AfterViewInit} from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { DemographyFormService } from './demography-form.service';
 import { FormDataService } from './form-data.service'
+import { DemographyService } from './demography.service'
 import { Router } from '@angular/router';
 import {IMyDpOptions} from 'mydatepicker';
 
@@ -38,10 +39,13 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
 	loading=true;
 	nextEducation=[];
 	nextEducationMax=1;
+	isLoading = false;
 	myDatePickerOptions: IMyDpOptions = {
         dateFormat: 'dd/mm/yyyy',
     };
-    constructor(private fb: FormBuilder, private demographyFormService:DemographyFormService, private formDataService: FormDataService, private router: Router) {
+	constructor(private fb: FormBuilder, private demographyFormService:DemographyFormService, private formDataService: FormDataService, private router: Router
+	,private demographyService:DemographyService) {
+		this.isLoading = true;
 		let p = localStorage.getItem('demography-intro');
 		if(p == null){
 			this.router.navigateByUrl('/forbidden');
@@ -68,6 +72,7 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
 					this.formProgress = 100/dats.length;
 					this.dataForm = dats;
 					this.toFormGroup(this.dataForm);
+					this.isLoading = false;					
 				});
 				
 			});
@@ -125,9 +130,6 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
 			}
 		});
 		$('#formProgress').attr('style','width:'+100/6+'%');
-		setTimeout(() => {
-			$('.selectiongroup input').removeAttr('style');
-		}, 500);
 	}
 
 	toFormGroup(data) {
@@ -190,7 +192,7 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
     }
 
     onSubmit(){
-    	Materialize.Toast.removeAll();
+		this.removeToast();
     	let valid = [];
     	this.submitted = true;
     	let fControl = this.form.controls;
@@ -226,14 +228,33 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
 			Materialize.toast('Harap melengkapi form terlebih dahulu.', 4000);
     		$('#'+valid[0].id).focus();
     	}else{
-			Materialize.toast('Berhasil.', 4000);
-			localStorage.setItem('demography', "true");
-			this.router.navigateByUrl('/exam/interest');
+			this.isLoading = true;
+			this.demographyService.saveAccount(this.form.value, this.nextEducation).subscribe(res=>{
+				this.isLoading = false;
+				if(res['accountId'] != '00000000-0000-0000-0000-000000000000'){
+					Materialize.toast('Data Diri Berhasil disimpan.', 4000);
+					localStorage.setItem('demography', "true");
+					localStorage.setItem('accountId', res['accountId']);
+					let history = {
+						"email":this.form.controls.email.value,
+						"accountId":res['accountId'],
+						"last_url":'/exam/cognitive',
+						"session":'demography',
+						"data":[]
+					};
+					localStorage.setItem("history", JSON.stringify(history));
+					this.router.navigateByUrl('/exam/cognitive');
+				}else{
+					Materialize.toast('Gagal Menyimpan Data!', 4000);
+				}
+
+			});
     	}
     }
 
 	Next(){
-    	Materialize.Toast.removeAll();
+		this.removeToast();
+
 		let jk = this.sectionCount;
 		let jkTarget = jk + 1;
     	let fControl = this.form.controls;
@@ -302,6 +323,7 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
 	}
 
 	addNextEducation(data){
+		this.removeToast();
 		let check = true;
 		if(this.form.controls.next_education.status == 'INVALID'){
 			check = false;
@@ -320,16 +342,16 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
 				Materialize.toast('Rencana pendidikan maksimal 3.', 4000);
 			}else{
 				let faculty;
-				data.forEach(res => {
-					if(res.id==this.form.controls.next_faculty.value){
-						faculty = res.name;
-					}
-				});
+				// data.forEach(res => {
+				// 	if(res.id==this.form.controls.next_faculty.value){
+				// 		faculty = res.name;
+				// 	}
+				// });
 				let ps = {
 					id:'next_'+this.nextEducationMax,
 					next_education:this.form.controls.next_education.value==''?this.form.controls.input_next_education.value:this.form.controls.next_education.value,
 					next_school:this.form.controls.next_school.value==''?this.form.controls.input_next_school.value:this.form.controls.next_school.value,
-					next_faculty:this.form.controls.next_faculty.value==''?this.form.controls.input_next_faculty.value:faculty,
+					next_faculty:this.form.controls.next_faculty.value==''?this.form.controls.input_next_faculty.value:this.form.controls.next_faculty.value,
 					// next_prody:this.form.controls.next_prody.value==''?this.form.controls.input_next_prody.value:this.form.controls.next_prody.value,
 				}
 				this.nextEducation.push(ps);
@@ -337,6 +359,7 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
 				$(document).ready(function(){
 					$('.collapsible').collapsible();
 				});
+				Materialize.toast('Berhasil menambah rencana pendidikan.', 4000);
 			}
 		}else{
 			Materialize.toast('Harap lengkapi rencana pendidikan.', 4000);
@@ -349,5 +372,13 @@ export class DemographyComponent implements OnInit, OnChanges, AfterViewInit {
 		$(document).ready(function(){
 			$('.collapsible').collapsible();
 		});
+	}
+
+	removeToast(){
+		var toastElement = $('.toast').first()[0];
+		if(toastElement != undefined || toastElement != null){
+			var toastInstance = toastElement.M_Toast;
+			toastInstance.remove();
+		}
 	}
 }

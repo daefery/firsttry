@@ -110,7 +110,7 @@ export class ThankYouComponent {
     if(p == null){
             this.router.navigateByUrl('/forbidden');
     }else{
-        localStorage.setItem('personality', "true");
+      localStorage.removeItem('history');
     }
   }
 }

@@ -1,4 +1,5 @@
-<div class="row">
+<loading-root *ngIf="isLoading"></loading-root>
+<div class="row" [ngClass]="{'onloading':isLoading}">
     <div class="card white">
 		<div class="card-content">
 	  		<span class="card-title"><h3>Data Diri</h3></span>
@@ -72,7 +73,7 @@
 					          			id="{{propChild.name}}"
 				          				(change)="onChange(propChild.onchange, $event)"
 										bindLabel="name"
-										bindValue="id"
+										bindValue="name"
 										dropdownPosition="auto"
 										formControlName="{{propChild.name}}"
 										placeholder="{{propChild.placeholder}}"
@@ -83,7 +84,7 @@
 							        	id="{{propChild.name}}"
 										(change)="onChange(propChild.onchange, $event)"
 										bindLabel="name"
-										bindValue="id"
+										bindValue="name"
 										dropdownPosition="auto"
 										formControlName="{{propChild.name}}"
 										placeholder="{{propChild.placeholder}}"
@@ -93,7 +94,7 @@
 									<ng-select [items]="OldDistrict" *ngIf="propChild.name == 'old_district'" 
 										id="{{propChild.name}}"
 										bindLabel="name"
-										bindValue="id"
+										bindValue="name"
 										dropdownPosition="auto"
 										formControlName="{{propChild.name}}"
 										placeholder="{{propChild.placeholder}}"
@@ -103,7 +104,7 @@
 									<ng-select [items]="NewDistrict" *ngIf="propChild.name == 'new_district'" 
 										id="{{propChild.name}}"
 										bindLabel="name"
-										bindValue="id"
+										bindValue="name"
 										dropdownPosition="auto"
 										formControlName="{{propChild.name}}"
 										placeholder="{{propChild.placeholder}}"

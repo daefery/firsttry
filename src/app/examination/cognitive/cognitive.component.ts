@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, OnChanges } from '@angular/core';
 import { CognitiveService } from './cognitive.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import {NgForm} from '@angular/forms';
 
 declare var $,Materialize,moment:any;
 
@@ -35,41 +36,51 @@ export class CognitiveComponent implements OnInit, AfterViewInit, OnDestroy {
     private sub: any;
     currentId:number;
     sectionToFinish = 0;
-    pagination=[];
+    pagination;
+    Duration;
+    resultSection;
+	isLoading = false;
     constructor(private _cognitiveService:CognitiveService, private activeRoute: ActivatedRoute, private router:Router) { 
-        // _cognitiveService.getSection().subscribe(res=>{
-        //     this.dataSection = res.sections;
-        //     console.log(this.dataSection);
-        // });
-        // this.dataSection = _cognitiveService.getSection().sections;
-        // this.currentDataSection = this.dataSection[this.currentDataSectionIndex];
-        // this.processDone = this.currentDataSection.questions.length;
-        // this.sectionName = this.currentDataSection.name;
-        // this.formProgress = 100/this.processDone;
-        for (let index = 0; index < 20; index++) {
-            this.pagination.push('');
-        }
     } 
     
     ngOnInit() {
-        let p = localStorage.getItem('cognitive-demo');
-        if(p == null){
-                this.router.navigateByUrl('/forbidden');
+        let history = localStorage.getItem("history") != null?JSON.parse(localStorage.getItem("history")):null;
+        if(history!=null){
+            localStorage.setItem(history.session, 'true');
+            localStorage.setItem('accountId', history.accountId);
         }
+        let p = localStorage.getItem('cognitive-demo');
+        let accountid = localStorage.getItem('accountId');
+        if(p == null || accountid == null){
+            this.router.navigateByUrl('/forbidden');
+        }
+        this.isLoading = true;
         this.sub = this.activeRoute.params.subscribe(params => {
+            this.pagination = [];
             this.currentId = +params['id'] - 1;
             if(!isNaN(this.currentId)){
+                this.sectionCount = +params['id'];
                 this.sectionProgress = 1;
-                this.currentDataSection = this._cognitiveService.getSection().sections[this.currentId];
-                this.sectionDataCount = this._cognitiveService.getSection().sections.length;
-                this.sectionName = this.currentDataSection.name;
-                this.IntroSection = `This is the tutorial for <b>`+this.sectionName+`</b>.`;
-                this.processDone = this.currentDataSection.questions.length;
-                this.formProgress = 100/this.processDone;
-                this.isIntroShow = true;
-                if(!this.isIntroShow){
-                    this.setTimer(this.currentDataSection.timeDuration);
-                }
+                this._cognitiveService.getSection().subscribe(res=>{
+                    let onlyCognitiveSection = res.sections.slice(0, 4);
+                    this.currentDataSection = onlyCognitiveSection[this.currentId];
+                    this.sectionDataCount = onlyCognitiveSection.length;
+                    this.sectionToFinish = +params['id'];
+                    this.sectionName = this.currentDataSection.name;
+                    this.Duration = this.currentDataSection.timeDuration;
+                    this.IntroSection = this._cognitiveService.getSectionIntro(+params['id']);
+                    this.processDone = this.currentDataSection.questions.length;
+                    this.formProgress = 100/this.processDone;
+                    this.isIntroShow = true;
+                    for (let index = 0; index < this.processDone; index++) {
+                        this.pagination.push('');
+                    }
+                    if(!this.isIntroShow){
+                        this.setTimer(this.currentDataSection.timeDuration);
+                    }
+                    this.isLoading = false;
+                });
+                
             }else{
                 this.router.navigateByUrl('/not-found');
             }
@@ -85,7 +96,7 @@ export class CognitiveComponent implements OnInit, AfterViewInit, OnDestroy {
             $('#countdown').html('');
             var functionInterval = null;
             var duration = null;
-            duration = moment.duration((60*60)*1000, 'milliseconds');
+            duration = moment.duration((1*60)*1000, 'milliseconds');
             functionInterval = setInterval(processTimer,10);
             $('#countdown').append('<h4 class="countdown_'+kl+' red-text" style="float: right">00:00:00</h4>');
             function processTimer(){
@@ -118,23 +129,42 @@ export class CognitiveComponent implements OnInit, AfterViewInit, OnDestroy {
             $(this).hide();
             $('#question_'+jkTarget).removeAttr('style');
             $('#question_'+jkTarget).fadeIn('slow');
+            $('html, body').animate({ scrollTop: 0 }, 'slow');               
         });
         this.formProgress = progress;
         this.sectionProgress++;
     }
 
     Done(){
+        this.isLoading = true;
         this.sectionCount++;
-        this.sectionToFinish++;
-
+        $('#btn-submit').trigger('click');
         if(this.sectionToFinish == this.sectionDataCount){
-            Materialize.toast('Berhasil!', 4000);
-            localStorage.setItem('cognitive', "true");
-            this.router.navigateByUrl('/exam/personality');
+            this._cognitiveService.save(this.resultSection, this.currentDataSection.sectionId).subscribe(res=>{
+                this.isLoading = false;
+                if(res.resultId != '00000000-0000-0000-0000-000000000000'){
+                    Materialize.toast('Kognitif Tes Berhasil disimpan.', 4000);
+                    localStorage.setItem('cognitive', "true");
+                    this.setLocalStorage('/exam/interest', 'cognitive');
+                    this.router.navigateByUrl('/exam/interest');
+                }else{
+					Materialize.toast('Gagal Menyimpan Data!', 4000);
+                }
+            });
         }else{
-            this.isIntroShow = true;
-            this.router.navigateByUrl('/exam/cognitive/'+this.sectionCount);
+            this._cognitiveService.save(this.resultSection, this.currentDataSection.sectionId).subscribe(res=>{
+                this.isLoading = false;
+                if(res.resultId != '00000000-0000-0000-0000-000000000000'){
+                    Materialize.toast('Anda Berhasil Melewati &nbsp;<b>'+this.sectionName+'</b>', 4000);
+                    this.isIntroShow = true;
+                    this.setLocalStorage('/exam/cognitive/'+this.sectionCount, 'cognitive-demo');
+                    this.router.navigateByUrl('/exam/cognitive/'+this.sectionCount);
+                }else{
+					Materialize.toast('Gagal Menyimpan Data!', 4000);
+                }
+            });
         }
+        this.sectionToFinish++;
     }
 
     Start(){
@@ -144,6 +174,7 @@ export class CognitiveComponent implements OnInit, AfterViewInit, OnDestroy {
         if(!this.isIntroShow){
             this.router.navigateByUrl('/exam/cognitive/'+this.sectionCount);
             this.setTimer(this.currentDataSection.timeDuration);
+            $('html, body').animate({ scrollTop: 0 }, 'slow');               
         }
     }
 
@@ -167,6 +198,21 @@ export class CognitiveComponent implements OnInit, AfterViewInit, OnDestroy {
         });
         this.formProgress = progress;
         this.sectionProgress = id;
+    }
+    onSubmit(f: NgForm) {
+        this.resultSection = f.value;
+    }
+
+    setLocalStorage(url, session){
+        let historyOld = localStorage.getItem("history") != null?JSON.parse(localStorage.getItem("history")):null;
+        let history = {
+            "email":historyOld.email,
+            "accountId":historyOld.accountId,
+            "last_url":url,
+            "session":session,
+            "data":[]
+        };
+        localStorage.setItem("history", JSON.stringify(history));
     }
   
 }

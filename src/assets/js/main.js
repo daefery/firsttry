@@ -1,4 +1,8 @@
 $( document ).ready(function() {
+    history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+        history.go(1);
+    };
     $(".button-collapse").sideNav();
     $('.modal').modal();
     var men = jQuery.parseJSON(localStorage.getItem("menus"));

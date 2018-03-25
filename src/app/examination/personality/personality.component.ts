@@ -35,23 +35,21 @@ export class PersonalityComponent implements OnInit, OnDestroy {
     isValidForm = false;
     isIntroShow = false;
     IntroSection;
-    expQs=[];
     isLoading = false;
+    resultSection=[];
     constructor(private personalityService : PersonalityService, private activeRoute: ActivatedRoute, private router:Router) { 
-        for (let index = 0; index < 7; index++) {
-            this.expQs.push("");
-        }
     }  
     ngOnInit() {
         this.isLoading = true;
-        // for(let i=0;i<10;i++){
-        //     this.dataSection.push("Membuat orang lain menjadi bersemangat, tertarik, dan berkomitmen untuk melakukan sesuatu dengan sebaik mungkin");
-        // }
-        // this.interestService.getSection().subscribe(res=>{
-        //     console.log(res);
-        // });
+        let history = localStorage.getItem("history") != null?JSON.parse(localStorage.getItem("history")):null;
+        if(history!=null){
+            localStorage.setItem(history.session, 'true');
+            localStorage.setItem('accountId', history.accountId);
+            this.resultSection = history.data;
+        }
         let p = localStorage.getItem('personality-demo');
-        if(p == null){
+        let accountid = localStorage.getItem('accountId');
+        if(p == null || accountid == null){
                 this.router.navigateByUrl('/forbidden');
         }
         this.sub = this.activeRoute.params.subscribe(params => {
@@ -61,14 +59,10 @@ export class PersonalityComponent implements OnInit, OnDestroy {
 
                 this.isValidForm = false;
                 this.pageNumber = +params['id'];
-                // this.interestService.getSection().subscribe(res=>{
-                //     this.dataSection = res.sections[1];
-                // });
-                // this.dataSection = this.interestService.getSection().subscribe(res=>{
-                    this.dataSection = this.personalityService.getSection().sections[0];
+                this.personalityService.getSection().subscribe(res=>{
+                    this.dataSection = res.sections[6];
                     this.totalQuestion = this.dataSection.questions.length;
                     let c = this.dataSection.questions.length/10;
-                    // this.IntroSection = `This is the tutorial for <b>MINAT BAKAT</b>.`;
                     if(!Number.isInteger(c)){
                         let sd = c.toString();
                         let k = sd.split('.');
@@ -87,8 +81,7 @@ export class PersonalityComponent implements OnInit, OnDestroy {
                         $('#formProgress').attr('style','width:'+prog+'%');
                     });
                     this.isLoading = false;
-                // });
-                // this.dataSection = //this.interestService.getSection().subscribe().sections[0];
+                });
                 
             }else{
                 this.router.navigateByUrl('/not-found');
@@ -107,28 +100,42 @@ export class PersonalityComponent implements OnInit, OnDestroy {
         let prog = this.initProgress;        
         $(document).ready(function(){
             $('#formProgress').attr('style','width:'+prog+'%');
+            $('html, body').animate({ scrollTop: 0 }, 'slow');               
         });
     }
 
     Next(){
-        Materialize.Toast.removeAll();
+        this.removeToast();
         $('#btn-submit').trigger('click');
         if(this.isValidForm){
             this.pageNumber++;
-            this.router.navigateByUrl('/exam/personality/'+this.pageNumber);        
+            this.setLocalStorage('/exam/personality/'+this.pageNumber, 'personality-demo');
+            this.router.navigateByUrl('/exam/personality/'+this.pageNumber);     
+            $('html, body').animate({ scrollTop: 0 }, 'slow');               
         }else{
             Materialize.toast('Harap melengkapi jawaban anda!', 4000);
         }
 
     }
     Done(){
-        Materialize.Toast.removeAll();
+        this.removeToast();
+        this.isLoading = true;
         $('#btn-submit').trigger('click');
         if(this.isValidForm){
-            Materialize.toast('Berhasil!', 4000);
-            localStorage.setItem('personality', "true");
-            this.router.navigateByUrl('/thankyou');        
+            this.personalityService.save(this.resultSection, this.dataSection.sectionId).subscribe(res=>{
+                this.isLoading = false;
+                if(res.resultId != '00000000-0000-0000-0000-000000000000'){
+                    Materialize.toast('Berhasil! Anda telah menyelesaikan seluruh rangkaian tes', 4000);
+                    localStorage.setItem('personality', "true");
+                    this.setLocalStorage('/thankyou', 'personality');
+                    this.router.navigateByUrl('/thankyou');        
+                }else{
+					Materialize.toast('Gagal Menyimpan Data!', 4000);
+                }
+
+            });
         }else{
+            this.isLoading = false;
             Materialize.toast('Harap melengkapi jawaban anda!', 4000);
         }
     }
@@ -140,12 +147,15 @@ export class PersonalityComponent implements OnInit, OnDestroy {
     //     this.router.navigateByUrl('/exam/interest/'+this.pageNumber);        
     // }
     onSubmit(f: NgForm) {
+        let index=[];
         for (let prop in f.value) {
+            let cls = $('#'+prop+' input');
             if(!f.valid){
                 $('#lbl-'+prop).remove();
-                let vl = $('#'+prop+' input').attr('class');
-                if(vl.includes('ng-invalid')){
-                    $('#'+prop).append('<span class="red-text text-darken-2" id="lbl-'+prop+'">Pilih jawaban terlebih dahulu.</span>');
+                let vl = cls.attr('class');
+            if(vl.includes('ng-invalid')){
+                    index.push(prop);
+                    $('#'+prop).append('<span class="red-text text-darken-2" id="lbl-'+prop+'">pilih jawaban terlebih dahulu.</span>');
                 }else{
                     $('#lbl-'+prop).remove();
                 }
@@ -154,5 +164,30 @@ export class PersonalityComponent implements OnInit, OnDestroy {
                 this.isValidForm = true;
             }
         }
+        if(index.length >0 ){
+            $('#'+index[0]+' input').focus();
+        }else{
+            this.resultSection.push(f.value);
+        }
       }
+
+    removeToast(){
+        var toastElement = $('.toast').first()[0];
+        if(toastElement != undefined || toastElement != null){
+			var toastInstance = toastElement.M_Toast;
+			toastInstance.remove();
+		}
+    }
+    
+    setLocalStorage(url, session){
+        let historyOld = localStorage.getItem("history") != null?JSON.parse(localStorage.getItem("history")):null;
+        let history = {
+            "email":historyOld.email,
+            "accountId":historyOld.accountId,
+            "last_url":url,
+            "session":session,
+            "data":this.resultSection
+        };
+        localStorage.setItem("history", JSON.stringify(history));
+    }
 }

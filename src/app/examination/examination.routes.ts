@@ -16,13 +16,12 @@ import { ThankYouComponent } from './thank-you.component';
 export const examinationRoutes: Routes = [
 	{ path: '', component: ExaminationComponent},
 	{ path: 'exam', redirectTo: '/', pathMatch: 'full'},
-	// { path: 'start', component: ExaminationComponent},
 	{ path: 'exam', component: MainExaminationComponent,
 		children: [
 			{ path: 'demography', component: DemographyIntroComponent },
 			{ path: 'demography/start', component: DemographyComponent },
 			{ path: 'interest', component: InterestIntroComponent },
-			{ path: 'interest/:id', component: InterestComponent },
+			{ path: 'interest/:part/:id', component: InterestComponent },
 			{ path: 'cognitive', component: CognitiveIntroComponent },
 			{ path: 'cognitive/:id', component: CognitiveComponent },
 			{ path: 'personality', component: PersonalityIntroComponent },
@@ -31,8 +30,4 @@ export const examinationRoutes: Routes = [
 		]
   	},
 	{ path: 'thankyou', component: ThankYouComponent }
-			/*	{ path: 'exam/cognitive', component: CognitiveComponent},
-	{ path: 'exam/pii', component: MainComponent},
-	{ path: 'exam/minatbakat', component: MainComponent},
-	{ path: 'exam/biodata', component: BiodataComponent}*/
 ];

@@ -2,7 +2,7 @@
 <div class="row" [ngClass]="{'onloading':isLoading}">
     <div class="card white">
 		<div class="card-content">
-	  		<span class="card-title"><h3>Minat Bakat</h3></span>
+	  		<span class="card-title"><h3>Minat</h3></span>
 			<hr class="hr-form"><br>
 			<div class="progress" *ngIf="!isIntroShow">
 				<div class="determinate" id="formProgress" style="width: 0%"></div>
@@ -12,12 +12,12 @@
 			</div>
 			<div class="row">
 				<div class="col s12">
-					<form *ngIf="!isIntroShow" #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+					<form *ngIf="!isIntroShow" #f="ngForm" (ngSubmit)="onSubmit(f)" id="interest-form" novalidate>
 						<div class="row" *ngFor="let propQs of dataQuestion; let i=index" >
 							<p class="col s12">{{i+1+currentNumber}}. {{propQs.name}}</p>
 							<br>
 							<br>
-							<div class="col s12 center-align">
+							<div class="col s12 center-align" *ngIf="Part == 1">
 								<div class="col s12">
 									<div class="col s1"></div>
 									<label class="col s1">Sangat Tidak Suka</label>
@@ -29,10 +29,11 @@
 										KESUKAAN
 									</p>
 									<p class="col s1" *ngFor="let propAns of propQs.answers;let p=index">
-										<input value="{{propAns.answerId}}" class="with-gap" name="{{propQs.questionId}}" type="radio" id="answer-{{propAns.answerId}}" ngModel 
+										<input value="{{propAns.answerId}}" class="with-gap" name="{{propQs.questionId}}" type="radio" id="answer-{{propQs.questionId}}-{{p}}" ngModel 
 										required />
-										<label for="answer-{{propAns.answerId}}">
-											{{p+1}}
+										<label for="answer-{{propQs.questionId}}-{{p}}">
+											{{propAns.name}}
+											<!-- {{p+1}} -->
 										</label>
 									</p>
 								</div>
@@ -50,13 +51,29 @@
 										KEMAMPUAN	
 									</p>
 									<p class="col s1" *ngFor="let propAns of propQs.answers;let p=index">
-										<input value="{{propAns.answerId}}" class="with-gap" name="kem-{{propQs.questionId}}" type="radio" id="answer-kem-{{propAns.answerId}}" ngModel 
+										<input value="{{propAns.answerId}}" class="with-gap" name="kem-{{propQs.questionId}}" type="radio" id="answer-kem-{{propQs.questionId}}-{{p}}" ngModel 
 										required />
-										<label for="answer-kem-{{propAns.answerId}}">
-											{{p+1}}
+										<label for="answer-kem-{{propQs.questionId}}-{{p}}">
+											{{propAns.name}}
 										</label>
 									</p>
 									
+								</div>
+							</div>
+							<div *ngIf="Part == 2" class="col s12 center-align">
+								<div class="col s12">
+									<label class="col s1">Sangat Tidak Suka</label>
+									<label class="col s5">Netral</label>
+									<label class="col s1">Sangat Suka</label>
+								</div><br>
+								<div class="col s12" id="{{propQs.questionId}}">
+									<p class="col s1" *ngFor="let propAns of propQs.answers;let p=index">
+										<input value="{{propAns.answerId}}" class="with-gap" name="{{propQs.questionId}}" type="radio" id="answer-{{propQs.questionId}}-{{p}}" ngModel 
+										required />
+										<label for="answer-{{propQs.questionId}}-{{p}}">
+											{{propAns.name}}
+										</label>
+									</p>
 								</div>
 							</div>
 							
@@ -64,88 +81,8 @@
 						</div>
 						<button type="submit" id="btn-submit" style="display: none"></button>
 					</form>
-					<div class="row" *ngIf="isIntroShow">
-						<!-- <p class="flow-text col s12" [innerHTML]="IntroSection">
-						</p> -->
-						<h4>INSTRUKSI</h4>
-						<p class="flow-text">Tes ini terdiri dari dua bagian. Pada bagian I saudara akan menemukan berbagai
-								aktivitas-aktivitas pekerjaan. Untuk bagian II saudara akan menemukan daftar
-								jenis pekerjaan yang akan saudara temui dimasa yang akan datang. Berilah
-								penilaian untuk setiap soal dengan teliti dan pastikan tidak ada soal yang
-								terlewat.</p>
-						<h4>INSTRUKSI BAGIAN I :</h4>
-						<p class="flow-text">
-								Pada bagian ini saudara akan menemukan daftar aktivitas yang telah saudara
-								temui atau yang akan saudara temui di masa yang akan datang. Bacalah setiap
-								aktivitas dengan teliti dan berilah dua penilaian terhadap setiap aktivitas yang
-								diberikan pada tempat yang telah disediakan.
-						</p><br>
-						<p class="flow-text">
-								Pertama berilah penilaian seberapa suka saudara pada aktivitas tersebut. Kedua
-								berilah penilaian mengenai kemampuan/kompetensi saudara untuk
-								mengerjakan aktivitas tersebut. Berilah skala antara 1 (satu) sampai dengan 7
-								(tujuh) untuk kesukaan dan kompetensi sesuai dengan keterangan dibawah ini.
-						</p><br><br>
-						<img src="assets/images/exam/interest/intro.jpg" class="responsive-image">
+					<div class="row" *ngIf="isIntroShow" [innerHTML]="IntroSection">
 						
-						<br><br>
-						<br><br>
-						<p class="flow-text">
-								Contoh : 1. Membuat Puisi
-						</p>
-						<p class="flow-text">
-							Pada soal contoh tersebut, pertama jika saudara sangat menyukai aktivitas
-							tersebut maka pada lembar jawaban tulis angka 7, Kedua jika saudara merasa
-							tidak mampu melakukannya maka pada lembar jawaban tulis angka 2.
-							Pada lembar jawaban :
-						</p>
-						<div class="col s12 center-align">
-							<div class="col s12">
-								<div class="col s1"></div>
-								<label class="col s2">Sangat Tidak Suka</label>
-								<label class="col s3">Netral</label>
-								<label class="col s3">Sangat Suka</label>
-							</div><br>
-							<div class="col s12">
-								<p class="col s1 green-text">
-									KESUKAAN
-								</p>
-								<p class="col s1" *ngFor="let eq of expQs;let p=index">
-									<input value="{{p}}" class="with-gap" name="ex-val" type="radio" id="answer-{{p}}" ngModel 
-									required />
-									<label for="answer-{{p}}">
-										{{p+1}}
-									</label>
-								</p>
-							</div>
-						</div>
-						<br>
-						<br>
-						<br>
-						<div class="col s12 center-align">
-							<div class="col s12">
-								<div class="col s1"></div>
-								<label class="col s2">Sangat Tidak Suka</label>
-								<label class="col s3">Netral</label>
-								<label class="col s3">Sangat Suka</label>
-							</div><br>
-							<div class="col s12">
-								<p class="col s1 blue-text">
-									KEMAMPUAN	
-								</p>
-								<p class="col s1" *ngFor="let eq of expQs;let p=index">
-									<input value="{{p}}" class="with-gap" name="ex-kes-val" type="radio" id="answer-kes-{{p}}" ngModel 
-									required />
-									<label for="answer-kes-{{p}}">
-										{{p+1}}
-									</label>
-								</p>
-								
-							</div>
-						</div><br>
-						<p class="flow-text">
-							Apabila anda sudah mengerti dengan cara pengerjaan dari intruksi di atas, harap memilih tombol <b>"MULAI"</b> untuk melakukan tes.
-						</p>
 					</div>
 				</div>
 

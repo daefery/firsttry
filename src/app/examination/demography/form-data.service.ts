@@ -9,10 +9,6 @@ import 'rxjs/add/operator/catch';
 export class FormDataService {
 	constructor(private http: HttpClient) { }
 
-    /*getProvince(): Observable<any[]> {
-        return this.http.get('http://dev.farizdotid.com/api/daerahindonesia/provinsi').map(res => res as any[] || []);
-    }*/
-
     getReligion(){
     	return [
 			{id:"ISLAM", name:"ISLAM"},
