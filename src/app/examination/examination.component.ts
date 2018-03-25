@@ -37,10 +37,10 @@ declare var $,Materialize:any;
 </div>
 <div class="center-div">
 	<a class="btn waves-effect waves-light home-button" (click)="Start()" id="menu">Mulai</a>
-	<a class="btn waves-effect waves-light home-button-login" (click)="showInput=true">Masuk</a>
+	<a class="btn waves-effect waves-light home-button-login" (click)="btnClick(true)">Masuk</a>
 	<div class="input-home" *ngIf="showInput">
 		<input placeholder="Masukan alamat email" id="email" type="email" (keydown)="keyDownFunction($event)" [(ngModel)]="email">
-		<a href="javascript:void(0)" (click)="showInput=false" class="red-text"><i class="material-icons">close</i></a>
+		<a href="javascript:void(0)" (click)="btnClick(false)" class="red-text"><i class="material-icons">close</i></a>
 	</div>
 </div>
 <div id="modal1" class="modal bottom-sheet">
@@ -109,6 +109,13 @@ export class ExaminationComponent implements AfterViewInit {
 		localStorage.removeItem('demography-demo');
 		localStorage.removeItem('accountId');
 		localStorage.setItem("start", "true");
+	}
+
+	btnClick(id){
+		this.showInput = id;
+		if(!id){
+			this.email='';
+		}
 	}
 	
 	ngAfterViewInit(): void {
