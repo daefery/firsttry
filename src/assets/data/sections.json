@@ -2,7 +2,7 @@
     "sections": [
         {
             "sectionId": "5cff201b-2da8-11e8-a272-5afce06f8961",
-            "name": "Verbal Reasoning.",
+            "name": "Verbal Reasoning",
             "hasGenericAnswer": false,
             "description": "Verbal Reasoning",
             "timeDuration": 100,
@@ -3395,7 +3395,7 @@
         },
         {
             "sectionId": "50cad119-2d1c-11e8-a272-5afce06f8961",
-            "name": "Spacial Reasoning.",
+            "name": "Spacial Reasoning",
             "hasGenericAnswer": false,
             "description": "Spacial Reasoning",
             "timeDuration": 100,
@@ -14898,7 +14898,7 @@
         },
         {
             "sectionId": "9a6a48b9-2e6f-11e8-a272-5afce06f8961",
-            "name": "Personality.",
+            "name": "Personaliti",
             "hasGenericAnswer": true,
             "description": "Dibawah ini terdapat beberapa karakteristik pribadi yang mungkin sesuai atau tidak sesuai dengan diri saudara. Tuliskan didepan\r\nsetiap pernyataan angka yang menunjukan tingkat persetujuan atau tidak persetujuan terhadap karakteristik tersebut. Isilah setiap\r\npernyataan sesuai dengan keadaan diri saudara yang sebenarnya dan bukan jawaban Ideal.",
             "timeDuration": 100,

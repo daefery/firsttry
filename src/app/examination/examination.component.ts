@@ -9,28 +9,28 @@ declare var $,Materialize:any;
       <img src="assets/images/exam/home/data-diri.jpg"> <!-- random image -->
       <div class="caption left-align">
         <h3 class="blue-grey-text">Data Diri</h3>
-				<h5 class="blue-grey-text lighten-3">deskripsi data diri</h5>
+				<h5 class="blue-grey-text lighten-3">profile, indentity, background</h5>
       </div>
-    </li>
+		</li>
+		<li>
+      <img src="assets/images/exam/home/cognitive.jpg"> <!-- random image -->
+      <div class="caption right-align">
+        <h3>Kognitif</h3>
+				<h5 class="light grey-text text-lighten-3">knowledge, comprehension, application, analysis, syntesis, evaluation</h5>
+      </div>
+		</li>
     <li>
       <img src="assets/images/assessments/Entrepreneurial.jpg"> <!-- random image -->
       <div class="caption right-align">
         <h3>Minat</h3>
-				<h5 class="light grey-text text-lighten-3">deksripsi minta</h5>
+				<h5 class="light grey-text text-lighten-3">social, emotion, experience</h5>
       </div>
     </li>
-    <li>
-      <img src="assets/images/exam/home/cognitive.jpg"> <!-- random image -->
-      <div class="caption right-align">
-        <h3>Kognitif</h3>
-				<h5 class="light grey-text text-lighten-3">deskripsi Kognitif</h5>
-      </div>
-		</li>
 		<li>
 		<img src="assets/images/exam/home/personality.jpg"> <!-- random image -->
 		<div class="caption left-align">
-			<h3 class="blue-grey-text">Personality</h3>
-			<h5 class="blue-grey-text lighten-3">deskripsi personality</h5>
+			<h3 class="blue-grey-text">Personaliti</h3>
+			<h5 class="blue-grey-text lighten-3">behaviour, characteristics, interesting</h5>
 		</div>
 	</li>
 	</ul>
