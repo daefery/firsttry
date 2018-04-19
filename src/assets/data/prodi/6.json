@@ -1,0 +1,12 @@
+{
+    "data":[
+        {"id":"Pendidikan Dokter", "name":"Pendidikan Dokter"},
+        {"id":"Pendidikan Dokter Gigi", "name":"Pendidikan Dokter Gigi"},
+        {"id":"Farmasi", "name":"Farmasi"},
+        {"id":"Kesehatan Masyarakat", "name":"Kesehatan Masyarakat"},
+        {"id":"Ilmu Gizi", "name":"Ilmu Gizi"},
+        {"id":"Keperawatan", "name":"Keperawatan"},
+        {"id":"Kebidanan", "name":"Kebidanan"},
+        {"id":"Kedokteran Hewan", "name":"Kedokteran Hewan"}
+    ]
+}

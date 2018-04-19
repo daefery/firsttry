@@ -1,26 +1,20 @@
 import { ModuleWithProviders }  from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-//component
-import { HomeComponent } from '@comp/home/home.component';
-import { ProfileComponent } from '@comp/profile/profile.component';
-import { LoginComponent } from '@comp/login/login.component';
-import { PageNotFoundComponent } from '@com/page-not-found/page-not-found.component';
-import { AssessmentsComponent } from '@comp/assessments/assessments.component';
 
-import { AdminComponent }    from '@comp/admin/admin.component';
-
-//route
- import { adminRoutes } from '@comp/admin/admin.routes'
+import { examinationRoutes } from './examination/examination.routes'
+import { NotFoundComponent } from './error-page/404.component'
+import { ForbiddenComponent } from './error-page/403.component'
 
 // Route Configuration
 export const routes: Routes = [
-  { path: '',component: HomeComponent },
-  { path: 'profile',component: ProfileComponent },
-  { path: 'assessments',component: AssessmentsComponent },
-  { path: 'assessments/:id',component: AssessmentsComponent },
-  { path: 'login',component: LoginComponent },
-  ...adminRoutes,
-  { path: '**',component: PageNotFoundComponent },
+ // { path: '',component: HomeComponent },
+ // { path: 'profile',component: ProfileComponent },
+ // { path: 'assessments',component: AssessmentsComponent },
+ // { path: 'assessments/:id',component: AssessmentsComponent },
+ // { path: 'login',component: LoginComponent },
+  ...examinationRoutes,
+  { path: 'forbidden',component: ForbiddenComponent },
+  { path: '**',component: NotFoundComponent }
   
 ];
 

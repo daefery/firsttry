@@ -1,0 +1,94 @@
+<loading-root *ngIf="isLoading"></loading-root>
+<div class="row" [ngClass]="{'onloading':isLoading}">
+    <div class="card white">
+		<div class="card-content">
+	  		<span class="card-title"><h3>Minat</h3></span>
+			<hr class="hr-form"><br>
+			<div class="progress" *ngIf="!isIntroShow">
+				<div class="determinate" id="formProgress" style="width: 0%"></div>
+				<div class="progress-text">
+					<h6 class="center-align">{{currentTotalQuestion}}/{{totalQuestion}}</h6>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12">
+					<form *ngIf="!isIntroShow" #f="ngForm" (ngSubmit)="onSubmit(f)" id="interest-form" novalidate>
+						<div class="row" *ngFor="let propQs of dataQuestion; let i=index" >
+							<p class="col s12">{{i+1+currentNumber}}. {{propQs.name}}</p>
+							<br>
+							<br>
+							<div class="col s12 center-align" *ngIf="Part == 1">
+								<div class="col s12">
+									<label class="col s2">Sangat Tidak Suka</label>
+									<label class="col s5">Netral</label>
+									<label class="col s1">Sangat Suka</label>
+								</div><br>
+								<div class="col s12" id="{{propQs.questionId}}">
+									<p class="col s1 green-text">
+										KESUKAAN
+									</p>
+									<p class="col s1" *ngFor="let propAns of propQs.answers;let p=index">
+										<input value="{{propAns.answerId}}" class="with-gap" name="{{propQs.questionId}}" type="radio" id="answer-{{propQs.questionId}}-{{p}}" ngModel 
+										required />
+										<label for="answer-{{propQs.questionId}}-{{p}}">
+											{{propAns.name}}
+										</label>
+									</p>
+								</div>
+								<br>
+								<br>
+								<br>
+								<div class="col s12">
+									<label class="col s2">Sangat Tidak Mampu</label>
+									<label class="col s5">Netral</label>
+									<label class="col s1">Sangat Mampu</label>
+								</div><br>
+								<div class="col s12" id="kem-{{propQs.questionId}}">
+									<p class="col s1 blue-text">
+										KEMAMPUAN	
+									</p>
+									<p class="col s1" *ngFor="let propAns of propQs.answers;let p=index">
+										<input value="{{propAns.answerId}}" class="with-gap" name="kem-{{propQs.questionId}}" type="radio" id="answer-kem-{{propQs.questionId}}-{{p}}" ngModel 
+										required />
+										<label for="answer-kem-{{propQs.questionId}}-{{p}}">
+											{{propAns.name}}
+										</label>
+									</p>
+									
+								</div>
+							</div>
+							<div *ngIf="Part == 2" class="col s12 center-align">
+								<div class="col s12">
+									<label class="col s1">Sangat Tidak Suka</label>
+									<label class="col s5">Netral</label>
+									<label class="col s1">Sangat Suka</label>
+								</div><br>
+								<div class="col s12" id="{{propQs.questionId}}">
+									<p class="col s1" *ngFor="let propAns of propQs.answers;let p=index">
+										<input value="{{propAns.answerId}}" class="with-gap" name="{{propQs.questionId}}" type="radio" id="answer-{{propQs.questionId}}-{{p}}" ngModel 
+										required />
+										<label for="answer-{{propQs.questionId}}-{{p}}">
+											{{propAns.name}}
+										</label>
+									</p>
+								</div>
+							</div>
+							
+						</div>
+						<button type="submit" id="btn-submit" style="display: none"></button>
+					</form>
+					<div class="row" *ngIf="isIntroShow" [innerHTML]="IntroSection">
+						
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="card-action">
+		  <a *ngIf="isIntroShow" class="waves-effect waves-light btn" (click)="Start()"><i class="material-icons right">forward</i>Mulai</a>
+			  <!-- <a *ngIf="pageNumber > 1" class="waves-effect waves-light btn" (click)="Back()"><i class="material-icons left">arrow_back</i>Sebelumnya</a> -->
+		  <a *ngIf="pageNumber != dataQuestionCount && !isIntroShow" class="waves-effect waves-light btn" (click)="Next()"><i class="material-icons right">arrow_forward</i>Selanjutnya</a>
+		  <a *ngIf="pageNumber == dataQuestionCount" class="waves-effect waves-light btn" (click)="Done()"><i class="material-icons right">send</i>Selesai</a>
+		</div>
+	</div>
+</div>

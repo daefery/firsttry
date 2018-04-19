@@ -1,0 +1,10 @@
+{
+    "data":[
+        {"id":"Teknik Informatika", "name":"Teknik Informatika"},
+        {"id":"Ilmu Komputer", "name":"Ilmu Komputer"},
+        {"id":"Teknik Komputer", "name":"Teknik Komputer"},
+        {"id":"Sistem Komputer", "name":"Sistem Komputer"},
+        {"id":"Sistem Informasi", "name":"Sistem Informasi"},
+        {"id":"Manajemen Informasi", "name":"Manajemen Informasi"}
+    ]
+}

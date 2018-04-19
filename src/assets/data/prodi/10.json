@@ -1,0 +1,18 @@
+{
+    "data":[
+        {"id":"Rias Wajah", "name":"Rias Wajah"},
+        {"id":"Rias Rambut", "name":"Rias Rambut"},
+        {"id":"Terapi", "name":"Terapi"},
+        {"id":"Kesehatan dan Kebugaran Pribadi", "name":"Kesehatan dan Kebugaran Pribadi"},
+        {"id":"Masase", "name":"Masase"},
+        {"id":"Refleksologi", "name":"Refleksologi"},
+        {"id":"Reiki", "name":"Reiki"},
+        {"id":"Rambut dan Kecantikan", "name":"Rambut dan Kecantikan"},
+        {"id":"Terapi Kecantikan", "name":"Terapi Kecantikan"},
+        {"id":"Yoga", "name":"Yoga"},
+        {"id":"Aromaterapi", "name":"Aromaterapi"},
+        {"id":"Higiene", "name":"Higiene"},
+        {"id":"Kebugaran", "name":"Kebugaran"},
+        {"id":"Kecantikan", "name":"Kecantikan"}
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "data":[
+        {"id":"Teater dan Seni Drama", "name":"Teater dan Seni Drama"},
+        {"id":"Seni Tari", "name":"Seni Tari"},
+        {"id":"Seni Rupa", "name":"Seni Rupa"},
+        {"id":"Seni Rupa Kreatif dan Desain", "name":"Seni Rupa Kreatif dan Desain"},
+        {"id":"Kerajinan Tangan", "name":"Kerajinan Tangan"},
+        {"id":"Administrasi Seni", "name":"Administrasi Seni"},
+        {"id":"Musik", "name":"Musik"}
+    ]
+}

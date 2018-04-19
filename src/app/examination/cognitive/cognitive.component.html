@@ -1,0 +1,125 @@
+<loading-root *ngIf="isLoading"></loading-root>
+<div class="row" [ngClass]="{'onloading':isLoading}">
+        <div class="card white" *ngIf="!isIntro">
+            <div class="card-content">
+                <span class="card-title"><h3>{{sectionName}} 
+                </h3></span>
+                <hr class="hr-form"><br>
+                <div class="row">
+                    <!-- <div class="col s12">
+                        <h4>{{sectionName}}</h4>
+                    </div> -->
+                   
+                    <ul class="pagination" style="float: left;" *ngIf="!isIntroShow">
+                        <li id="btn-page" *ngFor="let k of pagination;let idx=index" class="waves-effect" [ngClass]="{'active':sectionProgress == idx+1, 'done':sectionProgress!= idx+1 && k.status }">
+                            <a href="javascript:void(0)" (click)="goToPage(idx+1)">{{idx+1}}</a>
+                        </li>
+                    </ul>
+                    <div *ngIf="!isIntroShow" id="countdown">
+                    </div>
+                </div>
+                <div class="row">
+                        <div class="progress col s12" *ngIf="!isIntroShow">
+                                <div class="determinate" id="formProgress" style="width: 0%"></div>
+                                <div class="progress-text">
+                                    <h6 class="center-align">{{sectionProgress}}/{{processDone}}</h6>
+                                </div>
+                            </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col s12">
+                        <div class="row" *ngIf="!isIntroShow && currentDataSection != undefined">
+                            <form #f="ngForm" (ngSubmit)="onSubmit(f)" id="cognitive-form" novalidate>
+                                <div *ngFor="let propQs of currentDataSection.questions;let iQs=index" id="question_{{iQs + 1}}" [hidden]="iQs != 0">
+                                        <p *ngIf="propQs.type!='fullimage' && currentDataSection.name != 'Verbal Reasoning'" class="flow-text col s12">{{iQs+1}}. &nbsp;&nbsp; {{propQs.name}}</p>
+                                        <p *ngIf="propQs.type!='fullimage' && currentDataSection.name == 'Verbal Reasoning'" class="flow-text col s12" [innerHTML]="propQs.name"></p>
+                                        <div *ngIf="propQs.type=='fullimage'">
+                                                <p>
+                                                    {{iQs+1}}.
+                                                </p>
+                                                <div class="col s6">
+                                                        <img *ngIf="currentDataSection.name != 'General Reasoning'" class="responsive-img" width="250px" src="{{propQs.name}}">
+                                                        <img *ngIf="currentDataSection.name == 'General Reasoning'" class="responsive-img" width="540px" src="{{propQs.name}}">
+                                                </div>
+                                        </div>
+                                        <div class="col s12">&nbsp;&nbsp;</div>
+                                        <div *ngFor="let propAnswer of propQs.answers;let idx=index">
+                                            <div class="col s2" *ngIf="propQs.type=='image' || propQs.type=='fullimage'">
+                                                <input value="{{propAnswer.answerId}}" class="with-gap" name="{{propQs.questionId}}" type="radio" id="{{propAnswer.answerId}}" (change)="setDone(propQs.questionId)" ngModel/>
+                                                <label for="{{propAnswer.answerId}}">
+                                                    <img class="responsive-img" style="width: 80px;" src="{{propAnswer.name}}">
+                                                    <p *ngIf="idx==0" class="center-align">A.</p>
+                                                    <p *ngIf="idx==1" class="center-align">B.</p>
+                                                    <p *ngIf="idx==2" class="center-align">C.</p>
+                                                    <p *ngIf="idx==3" class="center-align">D.</p>
+                                                    <p *ngIf="idx==4" class="center-align">E.</p>
+                                                </label>
+                                            </div>
+                                            <p *ngIf="propQs.type=='text'">
+                                                <input value="{{propAnswer.answerId}}" class="with-gap" name="{{propQs.questionId}}" type="radio" id="{{propAnswer.answerId}}" (change)="setDone(propQs.questionId)" ngModel />
+                                                <label for="{{propAnswer.answerId}}">
+                                                    <p *ngIf="idx==0" class="left-align left">A.&nbsp;&nbsp;</p>
+                                                    <p *ngIf="idx==1" class="left-align left">B.&nbsp;&nbsp;</p>
+                                                    <p *ngIf="idx==2" class="left-align left">C.&nbsp;&nbsp;</p>
+                                                    <p *ngIf="idx==3" class="left-align left">D.&nbsp;&nbsp;</p>
+                                                    <p *ngIf="idx==4" class="left-align left">E.&nbsp;&nbsp;</p>
+                                                    {{propAnswer.name}}
+                                                </label>
+                                            </p>
+                                        </div>
+                                    </div>
+						            <button type="submit" id="btn-submit" style="display: none"></button>
+                            </form>
+                        </div>
+                        <div class="row" *ngIf="isIntroShow">
+                            <h5>Waktu : {{Duration}} Menit</h5>
+                            <h5>Jumlah soal : {{processDone}} Soal</h5>
+                            <br>
+                            <br>
+                            <div [innerHTML]="IntroSection">
+                            </div>
+                            <br>
+                            <p class="flow-text">
+                                    Apabila anda sudah mengerti dengan cara pengerjaan dari intruksi di atas, harap menekan tombol <b>"MULAI"</b> untuk melakukan tes.
+                            </p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="card-action">
+              <a *ngIf="sectionProgress > 1" class="waves-effect waves-light btn not-active" (click)="Back()" id="btn-back"><i class="material-icons left">arrow_back</i>Sebelumnya</a>
+              <a *ngIf="isIntroShow" class="waves-effect waves-light btn" (click)="Start()"><i class="material-icons right">forward</i>Mulai</a>
+              <a *ngIf="sectionProgress != processDone && !isIntroShow" class="waves-effect waves-light btn" (click)="Next()" id="btn-next"><i class="material-icons right">arrow_forward</i>Selanjutnya</a>
+              <button [ngClass]="{'hide':sectionProgress != processDone}" id="selesai" class="waves-effect waves-light btn" (click)="Done(false)"><i class="material-icons right">send</i>Selesai</button>
+            </div>
+            <div id="cogmodal" class="modal bottom-sheet">
+                <div class="modal-content">
+                    <p class="flow-text">Apakah Anda yakin untuk masuk ke soal selanjutnya Waktu untuk mengerjakan masih ada Anda bisa memeriksanya kembali?</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:void(0)" class="modal-action modal-close waves-effect waves-green btn red">Tidak</a>
+                    <a href="javascript:void(0)" class="modal-action modal-close waves-effect waves-green btn" (click)="Done(true)">Iya</a>
+                </div>
+            </div>
+        </div>
+        <div class="card white" *ngIf="isIntro">
+            <div class="card-content">
+                <span class="card-title">
+                    <h3>Petunjuk Aplikasi</h3>  
+                </span>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                        <img class="responsive-img" width="900px" src="assets/images/exam/cognitive/intro/task-intro.png">
+                        <p class="flow-text">
+                            Apabila anda sudah paham dengan informasi dan petunjuk di atas, silahkan menekan tombol <b>MULAI</b> untuk memulai pengerjaan.
+                        </p>
+                </div>
+            </div>
+            <div class="card-action">
+                <a class="btn waves-effect waves-light" routerLink="/exam/cognitive/1">Mulai</a>
+            </div>
+        </div>
+    </div>

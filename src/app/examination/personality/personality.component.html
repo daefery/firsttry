@@ -1,0 +1,72 @@
+<loading-root *ngIf="isLoading"></loading-root>
+<div class="row" [ngClass]="{'onloading':isLoading}">
+    <div class="card white">
+		<div class="card-content">
+	  		<span class="card-title"><h3>Personality</h3></span>
+			<hr class="hr-form"><br>
+			<div class="progress" *ngIf="!isIntroShow">
+				<div class="determinate" id="formProgress" style="width: 0%"></div>
+				<div class="progress-text">
+					<h6 class="center-align">{{currentTotalQuestion}}/{{totalQuestion}}</h6>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12">
+					<form *ngIf="!isIntroShow" #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+						<div class="row" *ngFor="let propQs of dataQuestion; let i=index" >
+							<p class="col s12">{{i+1+currentNumber}}. {{propQs.name}}</p>
+							<br>
+							<br>
+							<div class="col s12">
+								<div class="col s12">
+									<label class="col s2">Sangat tidak setuju</label>
+									<label class="col s2">Sedikit tidak setuju</label>
+									<label class="col s2">Tidak Keduanya</label>
+									<label class="col s2">Sedikit Setuju</label>
+									<label class="col s2">Sangat Setuju</label>
+								</div><br>
+								<div class="col s12" id="{{propQs.questionId}}">
+									<p class="col s2" *ngFor="let propAns of propQs.answers;let p=index">
+											<input value="{{propAns.answerId}}" class="with-gap" name="{{propQs.questionId}}" type="radio" id="answer-{{propQs.questionId}}-{{p}}" ngModel 
+											required />
+										<label for="answer-{{propQs.questionId}}-{{p}}">
+											{{p+1}}
+										</label>
+									</p>
+								</div>
+							</div>
+							
+							<!-- <span class="new badge red col s6">Pilih jawaban terlebih dahulu.</span> -->
+						</div>
+						<button type="submit" id="btn-submit" style="display: none"></button>
+					</form>
+					<div class="row" *ngIf="isIntroShow">
+						<!-- <p class="flow-text col s12" [innerHTML]="IntroSection">
+						</p> -->
+						<p class="flow-text">Pada test ini anda akan menemukan beberapa karakteristik yang mungkin akan menggambarakan diri saudara, pilihlah karakter yang paling mendekati dengan keadaan diri saudara yang sebenarnya dan bukan jawaban ideal. Pastikan anda mengisi setiap persoalan yang tersedia dan tidak ada yang terlewat.</p>
+						<p class="flow-text">Tugas saudara adalah memberikan angka pada setiap pernyataan yang menunjukan tingkat persetujuan atau tidak setuju terhadap karakteristik tersebut.</p>
+						<br><br>
+						<p class="flow-text">Berikut merupakan angka yang mewakili tingkat/derajat persetujuan.</p>
+						<img src="assets/images/exam/personality/personality.jpg" class="responsive-image">
+						
+						<br><br>
+						<br><br>
+						<p class="flow-text">
+							Karena test ini memiliki batasan waktu, bekerja lah dengan effektif, pilihlah pernyataan yang paling mendekati dengan keadaan diri saudara yang sebenarnya dan <b>bukan jawaban Ideal</b>.
+						</p><br>
+						<p class="flow-text">
+							Apabila anda sudah mengerti dengan cara pengerjaan dari intruksi di atas, harap memilih tombol <b>"MULAI"</b> untuk melakukan tes.
+						</p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="card-action">
+		  <a *ngIf="isIntroShow" class="waves-effect waves-light btn" (click)="Start()"><i class="material-icons right">forward</i>Mulai</a>
+			  <!-- <a *ngIf="pageNumber > 1" class="waves-effect waves-light btn" (click)="Back()"><i class="material-icons left">arrow_back</i>Sebelumnya</a> -->
+		  <a *ngIf="pageNumber != dataQuestionCount && !isIntroShow" class="waves-effect waves-light btn" (click)="Next()"><i class="material-icons right">arrow_forward</i>Selanjutnya</a>
+		  <a *ngIf="pageNumber == dataQuestionCount" class="waves-effect waves-light btn" (click)="Done()"><i class="material-icons right">send</i>Selesai</a>
+		</div>
+	</div>
+</div>

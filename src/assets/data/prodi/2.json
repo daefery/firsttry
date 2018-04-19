@@ -1,0 +1,13 @@
+{
+    "data":[
+        {"id":"Biologi", "name":"Biologi"},
+        {"id":"Fisika", "name":"Fisika"},
+        {"id":"Geografi", "name":"Geografi"},
+        {"id":"Geologi", "name":"Geologi"},
+        {"id":"Geofisika", "name":"Geofisika"},
+        {"id":"Kimia", "name":"Kimia"},
+        {"id":"Statistika", "name":"Statistika"},
+        {"id":"Matematika", "name":"Matematika"},
+        {"id":"Astronomi", "name":"Astronomi"}
+    ]
+}

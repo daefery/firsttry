@@ -1,0 +1,21 @@
+{
+    "data":[
+        {"id":"Teknik Fisika", "name":"Teknik Fisika"},
+        {"id":"Teknik Metrologi dan Instrumentasi", "name":"Teknik Metrologi dan Instrumentasi"},
+        {"id":"Teknik Perkapalan", "name":"Teknik Perkapalan"},
+        {"id":"Teknik Kelautan", "name":"Teknik Kelautan"},
+        {"id":"Teknik Metalurgi dan Material", "name":"Teknik Metalurgi dan Material"},
+        {"id":"Teknik Mesin", "name":"Teknik Mesin"},
+        {"id":"Teknik Komputer", "name":"Teknik Komputer"},
+        {"id":"Teknik Geologi", "name":"Teknik Geologi"},
+        {"id":"Teknik Elektro", "name":"Teknik Elektro"},
+        {"id":"Teknik Perminyakan", "name":"Teknik Perminyakan"},
+        {"id":"Arsitektur", "name":"Arsitektur"},
+        {"id":"Arsitektur Interior", "name":"Arsitektur Interior"},
+        {"id":"Transportasi Laut", "name":"Transportasi Laut"},
+        {"id":"Teknik Kimia", "name":"Teknik Kimia"},
+        {"id":"Teknik Bioproses", "name":"Teknik Bioproses"},
+        {"id":"Teknik Lingkungan", "name":"Teknik Lingkungan"},
+        {"id":"Teknik Industri", "name":"Teknik Industri"}
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "data":[
+        {"id":"Humaniora – Umum", "name":"Humaniora – Umum"},
+        {"id":"Literatur", "name":"Literatur"},
+        {"id":"Sejarah", "name":"Sejarah"},
+        {"id":"Studi Keagamaan", "name":"Studi Keagamaan"},
+        {"id":"Studi Bahasa Inggris", "name":"Studi Bahasa Inggris"},
+        {"id":"Arkeologi", "name":"Arkeologi"},
+        {"id":"Filsafat", "name":"Filsafat"},
+        {"id":"Bahasa Lainnya", "name":"Bahasa Lainnya"},
+        {"id":"Humaniora Lainnya", "name":"Humaniora Lainnya"}
+    ]
+}
